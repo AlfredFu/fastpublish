@@ -1,0 +1,2 @@
+# fastpublish
+For application publish
