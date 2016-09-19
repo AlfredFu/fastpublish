@@ -26,13 +26,9 @@ public class ProductController {
 		return "product/list";
 	}
 	
-	@RequestMapping(value="product/list", method=RequestMethod.GET)
-	public String newProduct(Model model){
-		return "product/new";
-	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public String createProduct(@Valid Product product, BindingResult bindingResult){
-		return "";
-	}
+//	@RequestMapping(method=RequestMethod.POST)
+//	public String createProduct(@Valid Product product, BindingResult bindingResult){
+//		return "";
+//	}
 }
