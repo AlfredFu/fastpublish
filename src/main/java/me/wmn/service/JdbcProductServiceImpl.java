@@ -26,4 +26,17 @@ public class JdbcProductServiceImpl implements IProductService {
 		this.productDao = productDao;
 	}
 
+	public Product getById(Integer id) {
+		return this.productDao.getProductByID(id);
+	}
+
+	public void saveProduct(Product product) {
+		this.productDao.addProduct(product);
+	}
+
+	public void deleteById(Integer id) {
+		this.productDao.deleteProductById(id);
+		
+	}
+
 }

@@ -5,12 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Product details</title>
 </head>
 <body>
-product list
-<c:forEach var="product" items="${products }">
+	<p>ID:${product.id }</p>
 	<p>产品名称：${product.name }</p>
-</c:forEach>
+
 </body>
 </html>

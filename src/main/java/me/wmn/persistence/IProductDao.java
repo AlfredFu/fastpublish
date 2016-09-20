@@ -13,7 +13,9 @@ public interface IProductDao {
 	
 	public List<Product> getAll();
 	
-	public boolean deleteProductById(String id);
+	public boolean deleteProductById(Integer id);
 	
-	public Product getProductByID(String id);
+	public Product getProductByID(Integer id);
+
+	public boolean saveProduct(Product product);
 }

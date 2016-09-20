@@ -26,7 +26,8 @@ public class JdbcProductDao implements IProductDao {
 		if(product !=null){
 			HashMap<String, String> params = new HashMap<String, String>();
 			params.put("name", product.getName());
-			this.npJdbcTemplate.update("INSERT INTO product(name)values(:name)", params);
+			params.put("description", product.getDescription() == null ? "" : product.getDescription());
+			this.npJdbcTemplate.update("INSERT INTO product(name,description)values(:name, :description)", params);
 		}
 	}
 
@@ -43,16 +44,30 @@ public class JdbcProductDao implements IProductDao {
 		return products;
 	}
 	
-	public boolean deleteProductById(String id) {
-		// TODO Auto-generated method stub
+	public boolean deleteProductById(Integer id) {
+		HashMap<String, Integer> params = new HashMap<String, Integer>();
+		params.put("id", id);
+		this.npJdbcTemplate.update("DELETE FROM product WHERE id=:id", params);
 		return false;
 	}
 
-	public Product getProductByID(String id) {
-		HashMap<String, String> params = new HashMap<String, String>();
+	public Product getProductByID(Integer id) {
+		HashMap<String, Integer> params = new HashMap<String, Integer>();
 		params.put("id", id);
-		Product target = this.npJdbcTemplate.queryForObject("SELECT id, name FROM product WHERE id=:id", params, Product.class);
+		Product target = this.npJdbcTemplate.queryForObject("SELECT id, name FROM product WHERE id=:id", params, new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException{
+				Product p = new Product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				return p;
+			}
+		});
 		return target;
+	}
+
+	public boolean saveProduct(Product product) {
+		
+		return false;
 	}
 
 }

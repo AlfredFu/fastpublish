@@ -109,7 +109,7 @@
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-validator</artifactId>
-		<version>4.1.0.Final</version>
+		<version>4.3.2.Final</version>
 	</dependency>
 	<dependency>
 		<groupId>org.slf4j</groupId>
@@ -121,6 +121,8 @@
 		<artifactId>slf4j-log4j12</artifactId>
 		<version>1.5.8</version>
 	</dependency>
+	
+	
   </dependencies>
   <build>
     <finalName>fastpublish</finalName>

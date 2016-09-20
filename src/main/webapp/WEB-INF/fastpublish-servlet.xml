@@ -16,6 +16,19 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<context:component-scan base-package="me" />
+	
+	<mvc:annotation-driven validator="validator"/>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+		<property name="validationMessageSource" ref="messageSource"/>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" >
+		<property name="basename" value="i18n/message"/>
+	</bean>
+	
 	<!-- 配置Spring连接池数据源 -->
 	<!-- Using Jakarata Common Database Connection Pooling(DBCP) to configure data source -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -35,7 +48,7 @@
 	</bean>
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
- 	<mvc:annotation-driven />
+ 	
  	
  	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
@@ -47,7 +60,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean> 
 	
-	<context:component-scan base-package="me" />
+	
 	
 
 </beans>
