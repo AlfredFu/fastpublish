@@ -9,18 +9,8 @@
 </head>
 <body>
 product list
-<table>
-<thead>
-<tr><td>ID</td><td>Name</td></tr>
-</thead>
-<tbody>
 <c:forEach var="product" items="${products }">
-	<tr>
-		<td>${product.id }</td>
-		<td><a href="/product/${product.id}">${product.name }</a></td>
-	</tr>
+	<p>产品名称：${product.name }</p>
 </c:forEach>
-</tbody>
-</table>
 </body>
 </html>

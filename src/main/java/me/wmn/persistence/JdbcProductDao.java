@@ -31,9 +31,10 @@ public class JdbcProductDao implements IProductDao {
 	}
 
 	public List<Product> getAll() {
-		List<Product> products = this.npJdbcTemplate.query("SELECT name FROM product", new RowMapper<Product>(){
+		List<Product> products = this.npJdbcTemplate.query("SELECT id,name FROM product", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException{
 				Product p = new Product();
+				p.setId(rs.getInt("id"));
 				p.setName(rs.getString("name"));
 				return p;
 			}
@@ -41,10 +42,17 @@ public class JdbcProductDao implements IProductDao {
 		
 		return products;
 	}
-
+	
 	public boolean deleteProductById(String id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public Product getProductByID(String id) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("id", id);
+		Product target = this.npJdbcTemplate.queryForObject("SELECT id, name FROM product WHERE id=:id", params, Product.class);
+		return target;
 	}
 
 }

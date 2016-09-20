@@ -5,8 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,6 +23,17 @@ public class ProductController {
 		List<Product> products = this.productService.getAll();
 		model.put("products", products);
 		return "product/list";
+	}
+	
+	@RequestMapping("/product/{id}")
+	public String showProducts(@PathVariable String id){
+		
+		return "product/detail";
+	}
+	
+	@RequestMapping(value="product/new", method=RequestMethod.GET)
+	public String newProducts(){
+		return "product/new";
 	}
 	
 	
