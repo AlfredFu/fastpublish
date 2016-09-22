@@ -33,18 +33,23 @@
 	<!-- Using Jakarata Common Database Connection Pooling(DBCP) to configure data source -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost/fastpublish"/>
+		<property name="url" value="jdbc:mysql://localhost/fastpublish?useUnicode=true&amp;characterEncoding=UTF-8"/>
 		<property name="username" value="fredfu"/>
 		<property name="password" value="" />
 		<property name="initialSize" value="5" />
 	</bean>
 	
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+	<bean id="npJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" abstract="false" lazy-init="false" autowire="default" >  
+        <property name="dataSource" ref="dataSource"/>
+    </bean> 
+	
 	<bean id="jdbcProductDao" class="me.wmn.persistence.JdbcProductDao">
-		<property name="npJdbcTemplate" ref="jdbcTemplate"/>
+		<property name="npJdbcTemplate" ref="npJdbcTemplate"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -60,7 +65,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean> 
 	
-	
+	<!-- 文件上传 -->
+	<!-- 此处ID不能修改， 类似的其他的Resolver的id也是一样的，因为DispatcherServert约定使用这个ID -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
 	
 
 </beans>

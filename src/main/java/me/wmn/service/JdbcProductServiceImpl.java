@@ -30,8 +30,8 @@ public class JdbcProductServiceImpl implements IProductService {
 		return this.productDao.getProductByID(id);
 	}
 
-	public void saveProduct(Product product) {
-		this.productDao.addProduct(product);
+	public Product saveProduct(Product product) {
+		return this.productDao.addProduct(product);
 	}
 
 	public void deleteById(Integer id) {

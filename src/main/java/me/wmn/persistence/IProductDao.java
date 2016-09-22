@@ -9,7 +9,7 @@ import me.wmn.domain.Product;
 @Component
 public interface IProductDao {
 	
-	public void addProduct(Product product);
+	public Product addProduct(Product product);
 	
 	public List<Product> getAll();
 	

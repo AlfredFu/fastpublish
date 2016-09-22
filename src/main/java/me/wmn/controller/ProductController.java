@@ -1,10 +1,15 @@
 package me.wmn.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,8 +18,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import me.mwn.exception.ImageUploadException;
 import me.wmn.domain.Product;
 import me.wmn.service.IProductService;
 
@@ -22,8 +30,11 @@ import me.wmn.service.IProductService;
 @RequestMapping("product")
 public class ProductController {
 	
+	private String webRootPath;
+	
 	@Autowired
 	public IProductService productService;
+
 
 	@RequestMapping("list")
 	public String listProducts(Map<String, Object> model){
@@ -52,9 +63,16 @@ public class ProductController {
 		return "product/new";
 	}
 	
+	@RequestMapping(value="edit/{id}", method=RequestMethod.GET)
+	public String editProducts(@PathVariable Integer id, ModelMap map){
+		Product p = this.productService.getById(id);
+		map.put("product", p);
+		return "product/new";
+	}
+	
 	
 	@RequestMapping(value="new", method=RequestMethod.POST)
-	public String createProduct(@Valid Product product, BindingResult bindingResult, ModelMap map){
+	public String createProduct(@Valid Product product, BindingResult bindingResult, @RequestParam(value="image", required=false) MultipartFile image, HttpServletRequest request, ModelMap map){
 		if(bindingResult.hasErrors()){
 			List<FieldError> errorList = bindingResult.getFieldErrors();
 			for(FieldError error : errorList){
@@ -62,8 +80,55 @@ public class ProductController {
 			}
 			return "product/new";
 		}else{
-			this.productService.saveProduct(product);
+			Product savedProduct = this.productService.saveProduct(product);
+			System.out.println(savedProduct);
+			
+			try{
+				if(!image.isEmpty()){        
+					this.validateImage(image);
+					String filepath = request.getRealPath("/") + savedProduct.getId() +  ".jpg"; 
+					System.out.println(filepath);
+					
+					this.saveImage(filepath, image);	
+				}
+			}catch(ImageUploadException e){
+				e.printStackTrace();
+				return "product/edit";
+			}
+			
 			return "redirect:list";
 		}
 	}
+	
+	@RequestMapping(value="{id}.jpg", method=RequestMethod.GET)
+	public void downloadImage(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response){
+		String filepath = request.getRealPath("/")  + id + ".jpg";
+		try{
+			byte[] bytesArr = FileUtils.readFileToByteArray(new File(filepath));
+			response.getOutputStream().write(bytesArr);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void validateImage(MultipartFile image) throws ImageUploadException{
+//		if(!image.getContentType().equals("image/jpeg")){
+//			throw new ImageUploadException("Only JPG images accepted");
+//		}
+	}
+	
+	private void saveImage(String filename, MultipartFile image) throws ImageUploadException{
+		File file = new File(filename);
+		try {
+			if(!file.exists()){
+				file.createNewFile();
+			}
+			FileUtils.writeByteArrayToFile(file, image.getBytes());
+		} catch (IOException e) {
+			throw new ImageUploadException("Unable to save image" + e);
+		}
+		
+	}
+
 }

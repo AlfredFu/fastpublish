@@ -8,7 +8,6 @@ public class Product {
 	private int id;
 	
 	@NotEmpty(message="{product.name.notempty}")
-	@Length(min=3, max=10)
 	private String name;
 	
 	@Length(min=10, max=1024)
@@ -39,5 +38,8 @@ public class Product {
 		this.description = description;
 	}
 	
+	public String toString(){
+		return "ID:" + id + "; NAME:" + name + ";DESCRIPTION:" + this.description;
+	}
 	
 }
