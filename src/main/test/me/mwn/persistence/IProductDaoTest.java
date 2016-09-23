@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import me.wmn.domain.Product;
-import me.wmn.persistence.JdbcProductDao;
+import me.wmn.persistence.jdbcimpl.JdbcProductDao;
 
 public class IProductDaoTest {
 	

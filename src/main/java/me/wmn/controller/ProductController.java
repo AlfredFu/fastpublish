@@ -109,7 +109,6 @@ public class ProductController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void validateImage(MultipartFile image) throws ImageUploadException{

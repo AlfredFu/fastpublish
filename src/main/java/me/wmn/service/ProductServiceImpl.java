@@ -7,12 +7,16 @@ import org.springframework.stereotype.Component;
 
 import me.wmn.domain.Product;
 import me.wmn.persistence.IProductDao;
+import me.wmn.persistence.IVersionDao;
 
 @Component
-public class JdbcProductServiceImpl implements IProductService {
+public class ProductServiceImpl implements IProductService {
 
 	@Autowired
 	public IProductDao productDao;
+	
+	@Autowired
+	public IVersionDao versionDao;
 	
 	public List<Product> getAll() {
 		return productDao.getAll();
@@ -27,7 +31,11 @@ public class JdbcProductServiceImpl implements IProductService {
 	}
 
 	public Product getById(Integer id) {
-		return this.productDao.getProductByID(id);
+		Product p = this.productDao.getProductByID(id);
+		if(p != null){
+			p.setVersionList(this.versionDao.getByProductID(id));
+		}
+		return p; 
 	}
 
 	public Product saveProduct(Product product) {

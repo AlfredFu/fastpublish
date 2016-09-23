@@ -22,3 +22,26 @@ table{
 .bg_grey{
 	background:#f3f3f3;
 }
+
+textarea{
+	margin-top:10px;
+}
+#sub_btn{
+	margin-top:10px;
+	margin-left:100px;
+	padding:5 10 5 10;
+}
+.error{
+	margin-left:10px;
+	color:red;
+	font-size:10px;
+}
+
+.new-button {
+    display: block;
+    width: 21px;
+    height: 21px;
+    background: url(../images/newBtn.png) top left no-repeat;
+    background-size: 21px 42px;
+    margin-left: 2px;
+}

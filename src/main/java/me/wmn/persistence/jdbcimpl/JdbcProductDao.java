@@ -1,4 +1,4 @@
-package me.wmn.persistence;
+package me.wmn.persistence.jdbcimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import me.wmn.domain.Product;
+import me.wmn.persistence.IProductDao;
 
 public class JdbcProductDao implements IProductDao {
 	
