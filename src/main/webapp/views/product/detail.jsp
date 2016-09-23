@@ -9,7 +9,7 @@
 </head>
 <body>
 	<p>ID:${product.id }</p>
-	<p>产品名称：${product.name }</p>
+	<p><img class="product_list_icon" src="${pageContext.request.contextPath }/product/${product.id }.jpg"/>产品名称：${product.name }</p>
 
 </body>
 </html>

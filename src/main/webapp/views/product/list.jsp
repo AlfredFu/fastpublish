@@ -6,32 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-table{
-	width:800px;
-	border:solid 1px;
-}
-.table_header{
-	background:rgb(66, 133, 244);
-	font-weight:bold;
-	color:white;
-	height:30px;
-	line-height:30px;
-}
-.table_header td{
-	text-align:center;
-}
-.remove_link{
-	color:red;
-}
-.product_list_icon{
-	width:40px;
-	height:40px;
-}
-.bg_grey{
-	background:#f3f3f3;
-}
-</style>
+
+<link rel="stylesheet" href="../css/common.css" />
 
 </head>
 <body>
@@ -50,7 +26,11 @@ product list, <a href="${pageContext.request.contextPath }/product/new">添加�
 		<c:forEach var="product" items="${products }" varStatus="status">
 			<tr <c:if test="${status.index %2 != 0 }">class="bg_grey"</c:if>>
 				<td style="width:40px;text-align:center;">${product.id }</td>
-				<td style="width:80px;text-align:center;"><img class="product_list_icon" src="${pageContext.request.contextPath }/product/${product.id }.jpg"/></td>
+				<td style="width:80px;text-align:center;">
+					<a href="${pageContext.request.contextPath }/product/${product.id}">
+						<img class="product_list_icon" src="${pageContext.request.contextPath }/product/${product.id }.jpg"/>
+					</a>
+				</td>
 				<td style="width:200px;"><a href="${pageContext.request.contextPath }/product/${product.id}">${product.name }</a></td>
 				<td><a href="${pageContext.request.contextPath }/product/${product.id}">${product.description }</a></td>
 				<td style="width:100px;text-align:center;"><a href="${pageContext.request.contextPath }/product/edit/${product.id}">编辑</a>|<a href="${pageContext.request.contextPath }/product/${product.id}/delete" class="remove_link">删除</a></td>

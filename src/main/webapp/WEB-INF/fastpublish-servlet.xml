@@ -53,6 +53,9 @@
 	</bean>
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 使得静态资源可以访问 -->
+	<mvc:resources location="/css/" mapping="/css/**" />
  	
  	
  	
