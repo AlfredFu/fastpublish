@@ -1,0 +1,24 @@
+table{
+	width:800px;
+	border:solid 1px;
+}
+.table_header{
+	background:rgb(66, 133, 244);
+	font-weight:bold;
+	color:white;
+	height:30px;
+	line-height:30px;
+}
+.table_header td{
+	text-align:center;
+}
+.remove_link{
+	color:red;
+}
+.product_list_icon{
+	width:40px;
+	height:40px;
+}
+.bg_grey{
+	background:#f3f3f3;
+}
