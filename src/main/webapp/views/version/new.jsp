@@ -12,7 +12,8 @@
 </head>
 <body>
 <div>
-	<form action="${pageContext.request.contextPath }/version/new?productID=${productId }" method="post">
+	<form action="${pageContext.request.contextPath }/version/new?productId=${productId}" method="post">
+		<input type="hidden" id="productId" value="${productId }"/>
 		<input type="hidden" id="id" name="id" value="${version.id }"/>
 		<label for="name">版本编号：</label><input type="text" id="name" name="name" value="${version.name}"/><span class="error">${ERR_name }</span>
 		<br>

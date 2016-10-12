@@ -1,5 +1,6 @@
 package me.wmn.controller;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -31,24 +32,25 @@ public class VersionController {
 	}
 	
 	@RequestMapping(value="new", method=RequestMethod.POST)
-	public String saveVersion(@Valid Version version, BindingResult bs, @RequestParam("productID") Integer productId, ModelMap map){
+	public String saveVersion(@Valid Version version, BindingResult bs, @RequestParam(value="productId", required=false) Integer productId, ModelMap map){
 		if(bs.hasErrors()){
 			List<FieldError> errors = bs.getFieldErrors();
 			for(FieldError error : errors){
 				map.put("ERR_" + error.getField(), error.getDefaultMessage());
 			}
-			return "version/new?productID" + productId;
+			return "version/new?productId=" + productId;
 		}else{
 			version.setProductId(productId);
 			
-			return "redirect:/product/productId";
+			return "redirect:/product/" + productId;
 		}
 		
 	}
 	
 	@RequestMapping(value="new", method=RequestMethod.GET)
-	public String newVersion(@RequestParam("productID") Integer productId, ModelMap map){
+	public String newVersion(@RequestParam("productId") Integer productId, ModelMap map){
 		map.put("productId", productId);
+		Hashtable<String, String> test= new Hashtable<String, String>();
 		return "version/new";
 	}
 

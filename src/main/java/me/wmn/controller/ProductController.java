@@ -27,7 +27,7 @@ import me.wmn.domain.Product;
 import me.wmn.service.IProductService;
 
 @Controller
-@RequestMapping("product")
+@RequestMapping("/product")
 public class ProductController {
 	
 	private String webRootPath;

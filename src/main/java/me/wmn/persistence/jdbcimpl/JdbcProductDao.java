@@ -94,6 +94,7 @@ public class JdbcProductDao implements IProductDao {
 			}
 		});
 		
+	
 		return products;
 	}
 	
