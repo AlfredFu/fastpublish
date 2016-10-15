@@ -19,6 +19,8 @@ public class TestMyBatis {
 			MybatisProductDao mpd = ss.getMapper(MybatisProductDao.class);
 			Product p = mpd.getProductById(29);
 			System.out.println(p.getName() + ",  " +p.getDescription());
+			
+			ss.close();
 		}
 		
 		public static void main(String[] args){
