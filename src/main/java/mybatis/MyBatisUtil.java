@@ -20,6 +20,7 @@ public class MyBatisUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 	}
 	
