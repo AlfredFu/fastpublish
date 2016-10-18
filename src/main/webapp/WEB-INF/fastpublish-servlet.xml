@@ -34,8 +34,7 @@
 	
 	
 	
-	<!-- 定时任务 -->
-    <task:annotation-driven/>
+	
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
@@ -80,10 +79,12 @@
         <property name="dataSource" ref="dataSource"/>
     </bean> 
 	
+	<!--  
 	<bean id="jdbcProductDao" class="me.wmn.persistence.jdbcimpl.JdbcProductDao">
 		<property name="npJdbcTemplate" ref="npJdbcTemplate"/>
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
+	-->
 	
 	<!-- MyBatis 配置-->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -112,4 +113,5 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 	<import resource="spring-mvc.xml"/>
+	<import resource="spring-task.xml"/>
 </beans>
