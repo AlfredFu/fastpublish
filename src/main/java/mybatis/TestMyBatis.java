@@ -4,7 +4,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import me.wmn.domain.Product;
-import me.wmn.persistence.mybatisimpl.MybatisProductDao;
 
 public class TestMyBatis {
 
@@ -16,9 +15,8 @@ public class TestMyBatis {
 		public static void testSelect(){
 			SqlSession ss = sqlSessionFactory.openSession();
 			
+			Product p = ss.selectOne("getProductById", new Integer(29));
 			
-			MybatisProductDao mpd = ss.getMapper(MybatisProductDao.class);
-			Product p = mpd.getProductById(29);
 			System.out.println(p.getName() + ",  " +p.getDescription());
 			
 			ss.close();
