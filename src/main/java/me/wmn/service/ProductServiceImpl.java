@@ -32,9 +32,9 @@ public class ProductServiceImpl implements IProductService {
 
 	public Product getById(Integer id) {
 		Product p = this.productDao.getProductByID(id);
-		if(p != null){
-			p.setVersionList(this.versionDao.getByProductID(id));
-		}
+//		if(p != null){
+//			p.setVersionList(this.versionDao.getByProductID(id));
+//		}
 		return p; 
 	}
 

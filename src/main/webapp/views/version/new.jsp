@@ -20,11 +20,12 @@
 		<label for="versionType">版本类型</label>
 		<select id="versionType" name="versionType">
 			<optgroup>
-				<option value="1">DEV</option>
-				<option value="2">PREVIEW</option>
+				<option value="DEV">DEV</option>
+				<option value="PREVIEW">PREVIEW</option>
 			</optgroup>
 		</select>
-		
+		${ERR_versionType}
+		<br>
 		<input id="sub_btn" type="submit" value="创建"/>
 	</form>
 </div>

@@ -38,10 +38,11 @@ public class VersionController {
 			for(FieldError error : errors){
 				map.put("ERR_" + error.getField(), error.getDefaultMessage());
 			}
-			return "version/new?productId=" + productId;
+			map.put("productId", productId);
+			return "version/new";
 		}else{
 			version.setProductId(productId);
-			
+			this.versionService.saveVersion(version);
 			return "redirect:/product/" + productId;
 		}
 		

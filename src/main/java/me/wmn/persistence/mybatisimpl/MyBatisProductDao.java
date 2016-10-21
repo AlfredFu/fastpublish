@@ -32,7 +32,10 @@ public class MyBatisProductDao implements IProductDao{
 	}
 
 	public Product getProductByID(Integer id) {
-		return this.sqlSession.selectOne("getProductById", id);
+//		List<Product> productList = this.sqlSession.selectList("getProductById", id);
+//		return (productList != null && productList.size() > 0) ? productList.get(0) : null;
+		Product p = this.sqlSession.selectOne("getProductById", id);
+		return p;
 	}
 
 	public boolean saveProduct(Product product) {

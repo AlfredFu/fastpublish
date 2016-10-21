@@ -30,6 +30,7 @@
 	
 	<context:property-placeholder ignore-unresolvable="true" file-encoding="utf-8" location="/WEB-INF/jdbc.properties"/>
 	
+	<!-- 扫描指定包下的类，使得spring注解生效 -->
 	<context:component-scan base-package="me" />
 	
 	

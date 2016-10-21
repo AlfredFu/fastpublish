@@ -8,7 +8,6 @@
 <title>Product details</title>
 <link rel="stylesheet" href="../css/common.css" />
 <script src="../js/jquery-3.1.1.js"></script>
-<script src="../js/version.js"></script>
 </head>
 <body>
 	<p>ID:${product.id }</p>
@@ -17,7 +16,7 @@
 	<a href="${pageContext.request.contextPath }/version/new/?productId=${product.id}" class="new-button"></a>
 	<div>
 		<c:forEach  var="version" items="${product.versionList }">
-			<div><h2>Version ${version.name }</h2></div>
+			<div><h2>Version ${version.name }, ${version.versionType }</h2></div>
 			<div>
 				<table>
 					<thead>
@@ -30,7 +29,6 @@
 				</table>
 			</div>
 		</c:forEach>
-		<ul id="versionlist"></ul>
 	</div>
 </body>
 </html>

@@ -20,6 +20,25 @@
   </servlet-mapping>
 
 
+	<!-- 字符集处理过滤器，能够轻质对所有web请求编码进行utf-8过滤，从而避免出现乱码 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
   
   <icon>
   	<small-icon>/images/app_small.png</small-icon>

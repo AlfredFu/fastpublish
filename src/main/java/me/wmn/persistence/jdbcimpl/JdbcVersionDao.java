@@ -46,7 +46,7 @@ public class JdbcVersionDao implements IVersionDao{
 			final String sql = "INSERT INTO version(name, version_type, product_id) values(:name, :version_type, :product_id)";
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("name", version.getName());
-			paramMap.put("version_type", version.getVersionType());
+			paramMap.put("version_type", version.getVersionType().toString());
 			paramMap.put("product_id", version.getProductId());
 			this.npJdbcTemplate.update(sql, paramMap);
 		}

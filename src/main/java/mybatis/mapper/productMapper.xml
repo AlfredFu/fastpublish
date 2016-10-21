@@ -5,8 +5,14 @@
 <mapper namespace="me.wmn.persistence.mybatisimpl.MyBatisProductDao">
 
     <!-- 这里的id必须和UserMapper接口中的接口方法名相同 -->
-    <select id="getProductById" resultType="Product" parameterType="java.lang.Integer">
-        select * from product where id=#{id}
+    <select id="getProductById" resultMap="productResultMap" parameterType="java.lang.Integer">
+        select product.id as productId,
+        	product.name as productName,
+        	product.description as productDesc,
+        	version.id as versionId,
+        	version.name as versionName,
+        	version.version_type as versionType
+        	from product left join version on product.id=version.product_id where product.id=#{id}
     </select>
     
     <select id="getAll" resultType="me.wmn.domain.Product" >
@@ -20,6 +26,18 @@
     <insert id="addProduct" parameterType="me.wmn.domain.Product">
     	INSERT INTO product (name, description) values(#{name}, #{description})
     </insert>
+    
+    <resultMap type="Product" id="productResultMap">
+    	<id property="id" column="productId"></id>
+    	<result property="name" column="productName"/>
+    	<result property="description" column="productDesc"/>
+    	<collection property="versionList" ofType="me.wmn.domain.Version" javaType="java.util.ArrayList" column="versionId">
+    		<result property="id" column="versionId"/>
+    		<result property="name" column="versionName"/>
+    		<result property="productId" column="productId"/>
+    		<result property="versionType" column="versionType"/>
+    	</collection>
+    </resultMap>
     
     
     
