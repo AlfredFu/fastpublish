@@ -72,12 +72,14 @@
       <p>
       	<a target="blank" href="http://www.lexisnexis.com.au/lexisnexisred/">${product.name }</a> 
       	is a reliable, intelligent and convenient referencing tool providing you with access to your digital library via iPad, laptop or PC.
+      	<a href="${pageContext.request.contextPath }/version/new/?productId=${product.id}" style="color:red">Create a verson</a>
       </p>
-      <a href="${pageContext.request.contextPath }/version/new/?productId=${product.id}" class="new-button"></a>
+      
     </div>
     <div class="download">
       </div>
-  </div>  </div>
+  </div>  
+  </div>
 </div>
 
 
@@ -86,10 +88,11 @@
 <div class="home-content">
 
 
+<c:if test="${!empty product.versionList }">
 <c:forEach  var="version" items="${product.versionList }">
 <article class="newsentry">
   <header class="title">
-    <time datetime=""><%-- <fmt:parseDate value="${version.createDate }" type="date"/> --%>${version.createDate }</time>
+    <time datetime=""><fmt:formatDate value="${version.createDate }" type="date"/></time>
     <h2 class="newstitle">
       Lexis Red ${version.name } ${version.versionType } version is available
     </h2>
@@ -103,26 +106,30 @@
       <br/>
       <c:choose>
       	<c:when test="${empty version.packages }">
-      		<a href="${pageContext.request.contextPath }/package/new?vid=${version.id}">Upload package</a>
-      	</c:when>
+<%--       		<a href="${pageContext.request.contextPath }/package/new?vid=${version.id}">Upload package</a> | <a href="${pageContext.request.contextPath }/version/delete?id=${version.id}&pid=${version.productId}" style="color:red;">Delete this version</a>
+ --%>      	</c:when>
       	<c:otherwise>
 	      <c:forEach var="pke" items="${version.packages}">
 	      	<a href="${pageContext.request.contextPath }/package/download/${pke.id}">Lexis Red ${pke.osType} ${version.name }</a>
+	      	<a href="${pageContext.request.contextPath }/package/delete?id=${pke.id}&productId=${pke.productId}" style="color:red;">DEL</a>
 	      	<br/>
 	      </c:forEach>
-	      <a href="${pageContext.request.contextPath }/package/new?vid=${version.id}" >Upload package</a>
 	      <br>
       	</c:otherwise>
       
       </c:choose>
       
      iOS version can be installed via Testflight.
+     <br>
+     <a href="${pageContext.request.contextPath }/package/new?vid=${version.id}" >Upload package</a> | <a href="${pageContext.request.contextPath }/version/delete?id=${version.id}&pid=${version.productId}" style="color:red;">Delete this version</a>
+	 
      </p>     
     </div>
   
   </div>
 </article>
 </c:forEach>
+</c:if>
 
 </div>    
 </section><!-- layout-content -->
@@ -153,42 +160,3 @@
     <div class="elephpants"><div class="images"></div></div>
  <!-- External and third party libraries. -->
  </body></html>
- 
- 
-
-<!--  
-	<p><img class="product_list_icon" src="${pageContext.request.contextPath }/product/${product.id }.jpg"/><span class="productNameTitle">${product.name }</span></p>
-
-	<a href="${pageContext.request.contextPath }/version/new/?productId=${product.id}" class="new-button"></a>
-	<div>
-		<c:forEach  var="version" items="${product.versionList }">
-			<div>
-				<h2>Version ${version.name }, ${version.versionType }</h2>
-				<a href="${pageContext.request.contextPath }/package/new?vid=${version.id}">New Package</a>
-			</div>
-			<div>
-				<table>
-					<thead>
-						<tr>
-							<td>Build</td>
-							<td>Upload Date</td>
-							<td>External Testing Status</td>
-						</tr>
-						<c:if test="${!empty  version.packages}">
-						
-						<c:forEach var="pke" items="${version.packages}">
-						<tr>
-							<td>${pke.build }</td>
-							<td></td>
-							<td>${pke.osType }</td>
-						</tr>
-						</c:forEach>
-						</c:if>
-					</thead>
-				</table>
-			</div>
-		</c:forEach>
-	</div>
-</body>
-</html>
--->

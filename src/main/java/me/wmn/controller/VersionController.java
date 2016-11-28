@@ -51,8 +51,15 @@ public class VersionController {
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String newVersion(@RequestParam("productId") Integer productId, ModelMap map){
 		map.put("productId", productId);
-		Hashtable<String, String> test= new Hashtable<String, String>();
+		//Hashtable<String, String> test= new Hashtable<String, String>();
 		return "version/new";
+	}
+	
+	@RequestMapping("delete")
+	public String deleteVersionById(@RequestParam int id, @RequestParam int pid){
+		this.versionService.deleteById(id);
+		
+		return "redirect:/product/" + pid;
 	}
 
 }

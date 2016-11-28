@@ -20,8 +20,11 @@
 		<label for="versionType">版本类型</label>
 		<select id="versionType" name="versionType">
 			<optgroup>
-				<option value="DEV">DEV</option>
-				<option value="PREVIEW">PREVIEW</option>
+				<option value="DEV">Development</option>
+				<option value="PREVIEW">Preview</option>
+				<option value="UAT">UAT</option>
+				<option value="RC">RC</option>
+				<option value="OFFICIAL">Official</option>
 			</optgroup>
 		</select>
 		${ERR_versionType}

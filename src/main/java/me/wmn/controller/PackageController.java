@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import me.wmn.domain.OSPackage;
 import me.wmn.domain.Version;
 import me.wmn.service.IPackageService;
-import me.wmn.service.IProductService;
 import me.wmn.service.IVersionService;
 
 @Controller
@@ -80,7 +79,7 @@ public class PackageController {
 			
 			//persist package info to database
 			this.packageService.addPackage(osp);
-			return "redirect:/product/" + v.getProductId();
+			return "redirect:/product/" + v.getProductId() + "/activity";
 			
 		}
 	}
@@ -110,6 +109,13 @@ public class PackageController {
 			}
 		}
 		
+	}
+	
+	
+	@RequestMapping("delete")
+	public String deletePackage(@RequestParam int id, @RequestParam int productId){
+		this.packageService.deleteById(id);
+		return "redirect:/product/" + productId;
 	}
 	
 	

@@ -10,4 +10,6 @@ public interface IVersionService {
 	public void saveVersion(Version version);
 	
 	public Version getById(Integer id);
+	
+	public void deleteById(Integer id);
 }

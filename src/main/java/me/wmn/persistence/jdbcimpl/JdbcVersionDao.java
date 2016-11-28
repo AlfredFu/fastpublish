@@ -81,6 +81,13 @@ public class JdbcVersionDao implements IVersionDao{
 		return v;
 	}
 	
+	@Override
+	public void deleteById(int id){
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		this.npJdbcTemplate.update("DELETE FROM version WHERE id=:id", paramMap);
+	}
+	
 	
 
 }

@@ -4,5 +4,6 @@ public enum VersionTypeEnum {
 	PREVIEW,
 	DEV,
 	UAT,
-	RC
+	RC,
+	OFFICIAL
 }

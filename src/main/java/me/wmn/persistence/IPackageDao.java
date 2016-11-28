@@ -14,4 +14,6 @@ public interface IPackageDao {
 	
 	public OSPackage getById(int id);
 	
+	public void deleteByVersionId(int versionId);
+	
 }

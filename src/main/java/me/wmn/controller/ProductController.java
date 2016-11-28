@@ -67,6 +67,23 @@ public class ProductController {
 		}
 		return new ModelAndView("product/detail", model);
 	}
+	@RequestMapping("{id}/activity")
+	public ModelAndView showProductActivity(@PathVariable("id") Integer id, ModelMap model){
+		if(id != null){
+			Product p = this.productService.getById(id);
+			List<OSPackage> packages = this.packageService.getByProductId(p.getId());
+			for(Version v : p.getVersionList()){
+				v.setPackages(new ArrayList<OSPackage>());
+				for(OSPackage pke : packages){
+					if(pke.getVersionId() == v.getId()){
+						v.getPackages().add(pke);
+					}
+				}
+			}
+			model.put("product", p);
+		}
+		return new ModelAndView("product/activity", model);
+	}
 	
 	@RequestMapping("{id}/delete")
 	public String deleteById(@PathVariable("id") Integer id){
