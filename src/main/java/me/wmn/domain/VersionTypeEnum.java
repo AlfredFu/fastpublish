@@ -2,5 +2,7 @@ package me.wmn.domain;
 
 public enum VersionTypeEnum {
 	PREVIEW,
-	DEV
+	DEV,
+	UAT,
+	RC
 }

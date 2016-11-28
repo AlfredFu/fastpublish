@@ -9,4 +9,6 @@ public interface IVersionDao {
 	public List<Version> getByProductID(Integer productID);
 	
 	public void saveVersion(Version version);
+	
+	public Version getById(Integer id);
  }

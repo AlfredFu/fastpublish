@@ -203,5 +203,16 @@
   
   <build>
     <finalName>fastpublish</finalName>
+    
+    <!-- 配置maven插件工作方式 -->
+    <plugins>
+    	<plugin>
+    		<artifactId>maven-surefire-plugin</artifactId>
+    		<configuration>
+    			<includes>**/Test*.java</includes>
+    		</configuration>
+    	</plugin>
+    	
+    </plugins>
   </build>
 </project>

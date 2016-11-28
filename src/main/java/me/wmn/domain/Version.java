@@ -1,5 +1,8 @@
 package me.wmn.domain;
 
+import java.util.Date;
+import java.util.List;
+
 public class Version {
 	
 	private Integer id;
@@ -9,6 +12,10 @@ public class Version {
 	private String name;
 
 	private Integer productId;
+	
+	private List<OSPackage> packages;
+	
+	private Date createDate;
 	
 	public Integer getId() {
 		return id;
@@ -42,5 +49,21 @@ public class Version {
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	
+
+	public List<OSPackage> getPackages() {
+		return packages;
+	}
+
+	public void setPackages(List<OSPackage> packages) {
+		this.packages = packages;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 }

@@ -16,8 +16,8 @@ table{
 	color:red;
 }
 .product_list_icon{
-	width:40px;
-	height:40px;
+	width:50px;
+	height:50px;
 }
 .bg_grey{
 	background:#f3f3f3;
@@ -44,4 +44,11 @@ textarea{
     background: url(../images/newBtn.png) top left no-repeat;
     background-size: 21px 42px;
     margin-left: 2px;
+}
+
+.productNameTitle{
+	margin-left:20px;
+	font-size:28px;
+	height:30px;
+	margin-top:20px;
 }

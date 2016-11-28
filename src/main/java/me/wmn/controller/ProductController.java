@@ -2,6 +2,7 @@ package me.wmn.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import me.mwn.exception.ImageUploadException;
+import me.wmn.domain.OSPackage;
 import me.wmn.domain.Product;
+import me.wmn.domain.Version;
+import me.wmn.service.IPackageService;
 import me.wmn.service.IProductService;
 
 @Controller
@@ -34,6 +38,9 @@ public class ProductController {
 	
 	@Autowired
 	public IProductService productService;
+	
+	@Autowired
+	public IPackageService packageService;
 
 
 	@RequestMapping("list")
@@ -47,6 +54,15 @@ public class ProductController {
 	public ModelAndView showProductDetails(@PathVariable("id") Integer id, ModelMap model){
 		if(id != null){
 			Product p = this.productService.getById(id);
+			List<OSPackage> packages = this.packageService.getByProductId(p.getId());
+			for(Version v : p.getVersionList()){
+				v.setPackages(new ArrayList<OSPackage>());
+				for(OSPackage pke : packages){
+					if(pke.getVersionId() == v.getId()){
+						v.getPackages().add(pke);
+					}
+				}
+			}
 			model.put("product", p);
 		}
 		return new ModelAndView("product/detail", model);
@@ -67,7 +83,22 @@ public class ProductController {
 	public String editProducts(@PathVariable Integer id, ModelMap map){
 		Product p = this.productService.getById(id);
 		map.put("product", p);
-		return "product/new";
+		return "product/edit";
+	}
+	
+	@RequestMapping(value="edit/{id}", method=RequestMethod.POST)
+	public String updateProducts(@Valid Product product, BindingResult bindingResult, @RequestParam(value="image", required=false) MultipartFile image, HttpServletRequest request, ModelMap map){
+		if(bindingResult.hasErrors()){
+			List<FieldError> errorList = bindingResult.getFieldErrors();
+			for(FieldError err : errorList){
+				map.put("ERR_" + err.getField(), err.getDefaultMessage());
+			}
+			return "product/edit/" + product.getId();
+		}else{
+			this.productService.updateProduct(product);
+		}
+		
+		return "redirect:/product/list";
 	}
 	
 	
@@ -105,6 +136,7 @@ public class ProductController {
 		String filepath = request.getRealPath("/")  + id + ".jpg";
 		try{
 			byte[] bytesArr = FileUtils.readFileToByteArray(new File(filepath));
+			
 			response.getOutputStream().write(bytesArr);
 		}catch(IOException e){
 			e.printStackTrace();

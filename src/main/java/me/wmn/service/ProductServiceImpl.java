@@ -32,9 +32,6 @@ public class ProductServiceImpl implements IProductService {
 
 	public Product getById(Integer id) {
 		Product p = this.productDao.getProductByID(id);
-//		if(p != null){
-//			p.setVersionList(this.versionDao.getByProductID(id));
-//		}
 		return p; 
 	}
 
@@ -45,6 +42,11 @@ public class ProductServiceImpl implements IProductService {
 	public void deleteById(Integer id) {
 		this.productDao.deleteProductById(id);
 		
+	}
+
+	@Override
+	public void updateProduct(Product product) {
+		this.productDao.updateProduct(product);
 	}
 
 }

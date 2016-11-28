@@ -29,4 +29,5 @@ public class IProductDaoTest {
 	public void testGetAll(){
 		System.out.println(dao.getAll());
 	}
+	
 }

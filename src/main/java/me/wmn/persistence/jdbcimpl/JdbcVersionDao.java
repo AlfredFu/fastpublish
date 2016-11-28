@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -22,7 +24,7 @@ public class JdbcVersionDao implements IVersionDao{
 	
 	public List<Version> getByProductID(Integer productID) {
 		if(productID != null){
-			final String sql = "SELECT * FROM version WHERE product_id=:product_id";
+			final String sql = "SELECT * FROM version WHERE product_id=:product_id ORDER BY create_datetime DESC";
 			HashMap<String, Integer> paramMap = new HashMap<String, Integer>();
 			paramMap.put("product_id", productID);
 			List<Version> versions = this.npJdbcTemplate.query(sql, paramMap, new RowMapper<Version>(){
@@ -33,6 +35,7 @@ public class JdbcVersionDao implements IVersionDao{
 					v.setName(rs.getString("name"));
 					v.setVersionType(VersionTypeEnum.valueOf(rs.getString("version_type")));
 					v.setProductId(rs.getInt("product_id"));
+					v.setCreateDate(rs.getDate("create_datetime"));
 					return v;
 				}
 			});
@@ -49,8 +52,33 @@ public class JdbcVersionDao implements IVersionDao{
 			paramMap.put("version_type", version.getVersionType().toString());
 			paramMap.put("product_id", version.getProductId());
 			this.npJdbcTemplate.update(sql, paramMap);
-		}
+		}	
+	}
+
+	@Override
+	public Version getById(Integer id) {
+		final String sql = "SELECT * FROM version WHERE id=:id";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		Version v = this.npJdbcTemplate.query(sql, paramMap, new ResultSetExtractor<Version>(){
+
+			@Override
+			public Version extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next()){
+					Version v = new Version();
+					
+					v.setId(rs.getInt("id"));
+					v.setName(rs.getString("name"));
+					v.setVersionType(VersionTypeEnum.valueOf(rs.getString("version_type")));
+					v.setProductId(rs.getInt("product_id"));
+					v.setCreateDate(rs.getDate("create_datetime"));
+					return v;
+				}
+				return null;
+			}
 			
+		});
+		return v;
 	}
 	
 	

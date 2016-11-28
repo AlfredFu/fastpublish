@@ -32,5 +32,6 @@
     
     <mappers>   
         <mapper resource="mybatis/mapper/productMapper.xml" />   
+        <mapper resource="mybatis/mapper/packageMapper.xml" />
     </mappers>   
 </configuration>  

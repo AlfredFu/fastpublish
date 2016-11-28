@@ -18,4 +18,6 @@ public interface IProductDao {
 	public Product getProductByID(Integer id);
 
 	public boolean saveProduct(Product product);
+	
+	public boolean updateProduct(Product product);
 }

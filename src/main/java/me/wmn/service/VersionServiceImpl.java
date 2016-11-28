@@ -31,4 +31,9 @@ public class VersionServiceImpl implements IVersionService{
 		
 	}
 
+	@Override
+	public Version getById(Integer id) {
+		return this.versionDao.getById(id);
+	}
+
 }

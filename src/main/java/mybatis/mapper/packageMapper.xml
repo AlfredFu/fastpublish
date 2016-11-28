@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.wmn.persistence.mybatisimpl.MyBatisPackageDao">
+    
+    <select id="getByProductId" resultMap="packageResultMap" parameterType="java.lang.Integer" >
+    	select * from package where product_id=#{id}
+    </select>
+    
+    <select id="getById" resultMap="packageResultMap" parameterType="java.lang.Integer">
+    	SELECT * FROM package WHERE id=#{id}
+    </select>
+    
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    	DELETE FROM package WHERE id=#{id}
+    </delete>
+    
+    <insert id="savePackage" parameterType="me.wmn.domain.OSPackage">
+    	INSERT INTO package (os_type, file_name, version_id, product_id ) values(#{osType}, #{packageName}, #{versionId}, #{productId})
+    </insert>
+ 
+ 	<resultMap  type="me.wmn.domain.OSPackage" id="packageResultMap">
+ 		<id property="id" column="id"></id>
+ 		<result property="osType" column="os_type"/>
+ 		<result property="packageName" column="file_name"/>
+ 		<result property="versionId" column="version_id"/>
+ 		<result property="productId" column="product_id"/>
+ 		<result property="build" column="build"/>
+ 	</resultMap>
+ 	
+</mapper>  

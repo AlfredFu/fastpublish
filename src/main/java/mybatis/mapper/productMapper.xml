@@ -11,8 +11,9 @@
         	product.description as productDesc,
         	version.id as versionId,
         	version.name as versionName,
-        	version.version_type as versionType
-        	from product left join version on product.id=version.product_id where product.id=#{id}
+        	version.version_type as versionType,
+        	version.create_datetime as createDatetime
+        	from product left join version on product.id=version.product_id where product.id=#{id} ORDER BY version.create_datetime DESC
     </select>
     
     <select id="getAll" resultType="me.wmn.domain.Product" >
@@ -27,6 +28,10 @@
     	INSERT INTO product (name, description) values(#{name}, #{description})
     </insert>
     
+    <update id="updateProduct" parameterType="me.wmn.domain.Product">
+    	UPDATE product set name=#{name}, description=#{description} WHERE id=#{id}
+    </update>
+    
     <resultMap type="Product" id="productResultMap">
     	<id property="id" column="productId"></id>
     	<result property="name" column="productName"/>
@@ -36,6 +41,7 @@
     		<result property="name" column="versionName"/>
     		<result property="productId" column="productId"/>
     		<result property="versionType" column="versionType"/>
+    		<result property="createDate" column="createDatetime" />
     	</collection>
     </resultMap>
     

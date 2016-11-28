@@ -12,4 +12,6 @@ public interface IProductService {
 	public Product saveProduct(Product product);
 
 	public void deleteById(Integer id);
+	
+	public void updateProduct(Product product);
 }

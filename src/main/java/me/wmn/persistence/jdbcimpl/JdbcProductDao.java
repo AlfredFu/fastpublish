@@ -125,4 +125,9 @@ public class JdbcProductDao implements IProductDao {
 		return false;
 	}
 
+	@Override
+	public boolean updateProduct(Product product) {
+		return false;
+	}
+
 }

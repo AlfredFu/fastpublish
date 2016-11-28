@@ -23,7 +23,7 @@ public class MyBatisProductDao implements IProductDao{
 	}
 
 	public List<Product> getAll() {
-		return this.sqlSession.selectList("getAll");
+		return this.sqlSession.selectList("me.wmn.persistence.mybatisimpl.MyBatisProductDao.getAll");
 	}
 
 	public boolean deleteProductById(Integer id) {
@@ -50,6 +50,11 @@ public class MyBatisProductDao implements IProductDao{
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
+	}
+
+	@Override
+	public boolean updateProduct(Product product) {
+		return this.sqlSession.update("updateProduct", product) > 0;
 	}
 
 	
