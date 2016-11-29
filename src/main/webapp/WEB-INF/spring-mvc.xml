@@ -79,4 +79,29 @@
     	</property>
     </bean> -->
     
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/product/**" />
+    		<mvc:mapping path="/package/**" />
+    		<mvc:mapping path="/version/**" />
+    		    		
+    		
+    		<bean class="me.wmn.interceptor.LoginInterceptor"></bean>
+    	</mvc:interceptor>
+    	
+    	<mvc:interceptor>
+    		<mvc:mapping path="/product/new" />
+    		<mvc:mapping path="/package/new" />
+    		<mvc:mapping path="/version/new" />
+    		<mvc:mapping path="/product/delete" />
+    		<mvc:mapping path="/package/delete" />
+    		<mvc:mapping path="/version/delete" />
+    		<mvc:mapping path="/product/edit" />
+    		<mvc:mapping path="/package/edit" />
+    		<mvc:mapping path="/version/edit" />
+    		
+    		<bean class="me.wmn.interceptor.AdminInterceptor"></bean>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+    
 </beans>

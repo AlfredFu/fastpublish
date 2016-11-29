@@ -36,6 +36,7 @@ public class JdbcVersionDao implements IVersionDao{
 					v.setVersionType(VersionTypeEnum.valueOf(rs.getString("version_type")));
 					v.setProductId(rs.getInt("product_id"));
 					v.setCreateDate(rs.getDate("create_datetime"));
+					v.setBuild(rs.getInt("build"));
 					return v;
 				}
 			});
@@ -46,11 +47,12 @@ public class JdbcVersionDao implements IVersionDao{
 
 	public void saveVersion(Version version) {
 		if(version != null){
-			final String sql = "INSERT INTO version(name, version_type, product_id) values(:name, :version_type, :product_id)";
+			final String sql = "INSERT INTO version(name, version_type, product_id, build) values(:name, :version_type, :product_id, :build)";
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("name", version.getName());
 			paramMap.put("version_type", version.getVersionType().toString());
 			paramMap.put("product_id", version.getProductId());
+			paramMap.put("build", version.getBuild());
 			this.npJdbcTemplate.update(sql, paramMap);
 		}	
 	}
@@ -87,7 +89,5 @@ public class JdbcVersionDao implements IVersionDao{
 		paramMap.put("id", id);
 		this.npJdbcTemplate.update("DELETE FROM version WHERE id=:id", paramMap);
 	}
-	
-	
 
 }

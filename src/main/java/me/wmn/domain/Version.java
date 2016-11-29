@@ -17,6 +17,8 @@ public class Version {
 	
 	private Date createDate;
 	
+	private int build;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -65,5 +67,15 @@ public class Version {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+	public int getBuild() {
+		return build;
+	}
+
+	public void setBuild(int build) {
+		this.build = build;
+	}
+	
+	
 
 }

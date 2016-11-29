@@ -11,6 +11,7 @@
  		<result property="versionId" column="version_id"/>
  		<result property="productId" column="product_id"/>
  		<result property="build" column="build"/>
+ 		<result property="description" column="description"/>
  	</resultMap>
     
     <select id="getByProductId" resultMap="packageResultMap" parameterType="java.lang.Integer" >
@@ -26,7 +27,7 @@
     </delete>
     
     <insert id="savePackage" parameterType="me.wmn.domain.OSPackage">
-    	INSERT INTO package (os_type, file_name, version_id, product_id ) values(#{osType}, #{packageName}, #{versionId}, #{productId})
+    	INSERT INTO package (os_type, file_name, version_id, product_id, description ) values(#{osType}, #{packageName}, #{versionId}, #{productId}, #{description})
     </insert>
     
     <delete id="deleteByVersionId" parameterType="java.lang.Integer">

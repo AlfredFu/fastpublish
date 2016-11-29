@@ -10,7 +10,7 @@
 <meta name="keywords" content="issue,bug,tracker" />
 <meta name="csrf-param" content="authenticity_token" />
 <meta name="csrf-token" content="K150cAxw23V80nBSJ5Qn6OKzgISwyALpyYr1VYzjSp3enoCdsq/nZqDYhIfYZWn+rUzBSvJZ7iNBWQcyswEN6Q==" />
-<link rel='shortcut icon' href='/favicon.ico' />
+<link rel='shortcut icon' href='http://www.lexisnexis.com/images/LN_favicon.ico' />
 <link rel="stylesheet" media="all" href="http://wiki.lexiscn.com/stylesheets/jquery/jquery-ui-1.11.0.css" />
 <link rel="stylesheet" media="all" href="http://wiki.lexiscn.com/themes/gitmike/stylesheets/application.css" />
 
@@ -56,7 +56,7 @@ $(window).load(function(){ warnLeavingUnsaved('The current page contains unsaved
         
         
 <div id="login-form">
-<form action="/login" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="7G3dxGOgVjfG/HrMLecRPu+yic1PGOM3LBAg+O4p8GUZrSkp3X9qJBr2jhnSFl8ooE3IAw2JD/2kw9Kf0cu3EQ==" />
+<form action="${pageContext.request.contextPath }/doLogin" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="7G3dxGOgVjfG/HrMLecRPu+yic1PGOM3LBAg+O4p8GUZrSkp3X9qJBr2jhnSFl8ooE3IAw2JD/2kw9Kf0cu3EQ==" />
 <input type="hidden" name="back_url" value="http://wiki.lexiscn.com/" />
 <table>
 <tr>

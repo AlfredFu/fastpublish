@@ -64,8 +64,9 @@ public class ProductController {
 				}
 			}
 			model.put("product", p);
+			model.put("subtab", "activity");
 		}
-		return new ModelAndView("product/detail", model);
+		return new ModelAndView("product/activity", model);
 	}
 	@RequestMapping("{id}/activity")
 	public ModelAndView showProductActivity(@PathVariable("id") Integer id, ModelMap model){
@@ -81,8 +82,28 @@ public class ProductController {
 				}
 			}
 			model.put("product", p);
+			model.put("subtab", "activity");
 		}
 		return new ModelAndView("product/activity", model);
+	}
+	
+	@RequestMapping("{id}/overview")
+	public ModelAndView showProductOverview(@PathVariable("id") Integer id, ModelMap model){
+		if(id != null){
+			Product p = this.productService.getById(id);
+			List<OSPackage> packages = this.packageService.getByProductId(p.getId());
+			for(Version v : p.getVersionList()){
+				v.setPackages(new ArrayList<OSPackage>());
+				for(OSPackage pke : packages){
+					if(pke.getVersionId() == v.getId()){
+						v.getPackages().add(pke);
+					}
+				}
+			}
+			model.put("product", p);
+			model.put("subtab", "overview");
+		}
+		return new ModelAndView("product/overview", model);
 	}
 	
 	@RequestMapping("{id}/delete")

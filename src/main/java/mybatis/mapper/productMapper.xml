@@ -12,7 +12,8 @@
         	version.id as versionId,
         	version.name as versionName,
         	version.version_type as versionType,
-        	version.create_datetime as createDatetime
+        	version.create_datetime as createDatetime,
+        	version.build as build
         	from product left join version on product.id=version.product_id where product.id=#{id} ORDER BY version.create_datetime DESC
     </select>
     
@@ -42,6 +43,7 @@
     		<result property="productId" column="productId"/>
     		<result property="versionType" column="versionType"/>
     		<result property="createDate" column="createDatetime" />
+    		<result property="build" column="build"/>
     	</collection>
     </resultMap>
     

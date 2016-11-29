@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import me.wmn.domain.OSPackage;
+import me.wmn.domain.Product;
 import me.wmn.domain.Version;
 import me.wmn.service.IPackageService;
+import me.wmn.service.IProductService;
 import me.wmn.service.IVersionService;
 
 @Controller
@@ -40,11 +42,19 @@ public class PackageController {
 	
 	@Autowired
 	private IVersionService versionService;
+	
+	@Autowired
+	private IProductService productService;
 
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String newPackage(ModelMap map, HttpServletRequest request){
-		map.put("versionId", request.getParameter("vid"));
-		return "package/new";
+		int productId = Integer.parseInt(request.getParameter("pid"));
+		List<Version> versions = this.versionService.getByProductID(productId);
+		Product p = this.productService.getById(productId);
+		
+		map.put("versions", versions);
+		map.put("product", p);
+		return "package/upload_package";
 	}
 	
 	
@@ -79,7 +89,7 @@ public class PackageController {
 			
 			//persist package info to database
 			this.packageService.addPackage(osp);
-			return "redirect:/product/" + v.getProductId() + "/activity";
+			return "redirect:/product/" + v.getProductId();
 			
 		}
 	}
@@ -113,9 +123,9 @@ public class PackageController {
 	
 	
 	@RequestMapping("delete")
-	public String deletePackage(@RequestParam int id, @RequestParam int productId){
+	public String deletePackage(@RequestParam int id, @RequestParam int pid){
 		this.packageService.deleteById(id);
-		return "redirect:/product/" + productId;
+		return "redirect:/product/" + pid;
 	}
 	
 	

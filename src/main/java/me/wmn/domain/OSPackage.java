@@ -13,6 +13,8 @@ public class OSPackage {
 	private OSTypeEnum osType;
 	
 	private int build;
+	
+	private String description;
 
 	public int getId() {
 		return id;
@@ -60,6 +62,14 @@ public class OSPackage {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
