@@ -45,7 +45,7 @@
     				</div>
 
 					<div id="header">
-					    <h1 style="background:url(${pageContext.request.contextPath }/product/${product.id}.jpg) no-repeat 0px 3px;background-size:40px 40px;">${product.name }</h1>
+					    <h1 style="background:url(http://staging2.lexisnexis.com.cn/29.jpg) no-repeat 0px 3px;background-size:40px 40px;">${product.name }</h1>
 					
 					    <div id="main-menu">
 					        <ul>

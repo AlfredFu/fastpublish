@@ -71,7 +71,7 @@ public class PackageController {
 			Version  v = this.versionService.getById(Integer.parseInt(request.getParameter("versionId")));
 			String[] tmpNames = ospackageFile.getOriginalFilename().split("\\.");
 			
-			String targetPackageName = this.packageService.getPackageName("Lexis_Red_",  v.getVersionType().toString(), v.getName(), osp.getBuild(), tmpNames[tmpNames.length -1]);
+			String targetPackageName = this.packageService.getPackageName("Lexis_Red",  v.getVersionType().toString(), v.getName(), osp.getBuild(), tmpNames[tmpNames.length -1]);
 			
 			String absFilePath = this.uploadFolder + targetPackageName;
 			File osPackageFile = new File(absFilePath);

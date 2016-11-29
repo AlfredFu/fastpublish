@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,13 +35,14 @@ import me.wmn.service.IProductService;
 @RequestMapping("/product")
 public class ProductController {
 	
-	private String webRootPath;
-	
 	@Autowired
 	public IProductService productService;
 	
 	@Autowired
 	public IPackageService packageService;
+	
+	@Value("${attachement.folder}")
+	private String uploadFolder;
 
 
 	@RequestMapping("list")
@@ -155,7 +157,7 @@ public class ProductController {
 			try{
 				if(!image.isEmpty()){        
 					this.validateImage(image);
-					String filepath = request.getRealPath("/") + savedProduct.getId() +  ".jpg"; 
+					String filepath = this.uploadFolder + savedProduct.getId() +  ".jpg"; 
 					System.out.println(filepath);
 					
 					this.saveImage(filepath, image);	
@@ -171,7 +173,7 @@ public class ProductController {
 	
 	@RequestMapping(value="{id}.jpg", method=RequestMethod.GET)
 	public void downloadImage(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response){
-		String filepath = request.getRealPath("/")  + id + ".jpg";
+		String filepath = this.uploadFolder  + id + ".jpg";
 		try{
 			byte[] bytesArr = FileUtils.readFileToByteArray(new File(filepath));
 			

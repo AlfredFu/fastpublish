@@ -25,7 +25,6 @@ textarea{
 <body>
 <div>
 	<form action="${pageContext.request.contextPath }/product/new" method="post" enctype="multipart/form-data">
-		<input type="hidden" id="id" name="id" value="${product.id }"/>
 		<label for="name">产品名称：</label><input type="text" id="name" name="name" value="${product.name}"/><span class="error">${ERR_name }</span>
 		<br>
 		<label for="description">产品描述：</label><textarea id="description" rows="30" cols="60" name="description" >${product.description }</textarea><span class="error">${ERR_description }</span>

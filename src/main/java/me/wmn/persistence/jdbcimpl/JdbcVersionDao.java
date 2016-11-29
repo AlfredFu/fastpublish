@@ -47,7 +47,7 @@ public class JdbcVersionDao implements IVersionDao{
 
 	public void saveVersion(Version version) {
 		if(version != null){
-			final String sql = "INSERT INTO version(name, version_type, product_id, build) values(:name, :version_type, :product_id, :build)";
+			final String sql = "INSERT INTO version(name, version_type, product_id, build, create_datetime) values(:name, :version_type, :product_id, :build, NOW())";
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("name", version.getName());
 			paramMap.put("version_type", version.getVersionType().toString());
