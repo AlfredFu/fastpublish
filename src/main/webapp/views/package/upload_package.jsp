@@ -1,5 +1,9 @@
 <%@ include file="../include/header.jsp" %>
 
+
+<script src="${pageContext.request.contextPath }/js/lib/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath }/js/initck.js"></script>
+
 <div id="main" class="nosidebar">
     <div id="sidebar">
         
@@ -56,18 +60,10 @@
 	<span class="error">${ERR_versionId }</span>
 </p>
 
-
-<%-- <p>
-		<label for="build">Build:</label>
-		<input type="text" name="build" id="build" /><span class="error">${ERR_build }</span>
-</p> --%>
-
-
     </div>
 <p>
 	<label for="description">What's new:</label>
-	<textarea id="description" name="description" rows="20" cols="60"></textarea>
-	
+	<textarea id="editor" name="description"></textarea>	
 </p>
 
 
@@ -89,4 +85,10 @@
         <div style="clear:both;"></div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+	initCKEditor();
+});
+</script>
 <%@ include file="../include/footer.jsp" %>
