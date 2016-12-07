@@ -67,7 +67,7 @@
 <div id="activity">
 
 <c:forEach var="version" items="${product.versionList }">
-
+<div id="v${version.id }">
 <h3>
 	<span>${version.name } <c:choose>
 					<c:when test="${version.versionType eq 'DEV'}">
@@ -89,28 +89,63 @@
 	
 <c:forEach  var="pke" items="${version.packages }">
 	
-  <dt class="issue  ">
+  <dt class="issue  " id="pkedt_${pke.id }">
   	<a href="${pageContext.request.contextPath }/package/download/${pke.id}">${product.name} ${pke.osType} ${version.name }</a> 
   	<c:if test="${sessionScope.username eq 'fredfu' }">
-  	<a style="color:red;" href="${pageContext.request.contextPath}/package/delete?id=${pke.id }&pid=${product.id}">Delete this package</a>
+  	<a class="delpackage_link" style="color:red;" data-pid="${product.id}"  data-pkeid="${pke.id }" >Delete this package</a>
   	</c:if>
   </dt>
-  <dd class="">
+  <dd id="pkedes_${pke.id }">
   	<span class="description">${pke.description }</span>
   </dd>
-  <c:if test="${sessionScope.username eq 'fredfu' }">
-  <dt>
-  </dt>
-  </c:if>
+ 
   </c:forEach>
 </dl>
-  	<a style="color:red;" href="${pageContext.request.contextPath}/version/delete?id=${version.id }&pid=${product.id}">Delete this version</a>
+ <c:if test="${sessionScope.username eq 'fredfu' }">
+  	<a class="delversion_link" style="color:red;" href="" data-vid="${version.id }" data-pid="${product.id}">Delete this version</a>
+  	 </c:if>
 <br>
 <br>
+</div>
 </c:forEach>
 
 
+<script>
+	$(document).ready(function(){
+		$(".delversion_link").click(function(){
+			if(confirm("All packages belongs to this version will be delete, <br>are you want to del this version")){
+				var vid = $(this).data("vid");
+				var pid = $(this).data("pid");
+				$.ajax({
+					url:"${pageContext.request.contextPath}/version/delete",
+					data:{id:vid, pid: pid},
+					success:function(result){
+						var id = "#v" + vid;
+						$(id).remove();
+					}
+				});
+			}	
+ 			return false;
+		});
+		
+		$(".delpackage_link").click(function(){
+			if(confirm("Are you sure you want to delete this package")){
+				var pkeid= $(this).data("pkeid");
+				var pid= $(this).data("pid");
+				$.ajax({
+					url:"${pageContext.request.contextPath}/package/delete", 
+					data:{id:pkeid, pid: pid},
+					success:function(result){
+						$("#pkedt_"+pkeid).remove();
+						$("#pkedes_" + pkeid).remove();
+					}
+				});
+			}
+			return false;
+		});
+	});
 
+</script>
 
 
 </div>

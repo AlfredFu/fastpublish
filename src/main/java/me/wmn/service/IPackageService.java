@@ -12,7 +12,7 @@ public interface IPackageService {
 	
 	public List<OSPackage> getByProductId(int productId);
 	
-	public String getPackageName(String productName, String versionType, String versionName, int build, String suffix);
+	public String getPackageName(String productName, String osType, String versionType, String versionName, int build, String suffix);
 	
 	public OSPackage getById(int id);
 }

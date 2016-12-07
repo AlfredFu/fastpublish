@@ -18,6 +18,7 @@
 		
 		<script src="http://wiki.lexiscn.com/javascripts/jquery-1.11.1-ui-1.11.0-ujs-3.1.3.js"></script>
 		<script src="http://wiki.lexiscn.com/javascripts/application.js"></script>
+		<script src="${pageContext.request.contextPath }/js/jquery-3.1.1.js"></script>
 	
 	
 	</head>

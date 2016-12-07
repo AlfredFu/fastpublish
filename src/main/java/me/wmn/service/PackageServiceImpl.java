@@ -14,7 +14,7 @@ import me.wmn.persistence.IPackageDao;
 @Service
 public class PackageServiceImpl implements IPackageService{
 	
-	private final String PACKAGE_NAME_PATTERN = "%s_%s_%s_%d.%s";
+	private final String PACKAGE_NAME_PATTERN = "%s_%s_%s_%s_%d.%s";
 	
 	@Autowired
 	private IPackageDao packageDao;
@@ -50,8 +50,8 @@ public class PackageServiceImpl implements IPackageService{
 	}
 
 	@Override
-	public String getPackageName(String productName, String versionType, String versionName, int build, String suffix) {
-		return String.format(this.PACKAGE_NAME_PATTERN, productName,versionType, versionName, build, suffix);
+	public String getPackageName(String productName, String osType, String versionType, String versionName, int build, String suffix) {
+		return String.format(this.PACKAGE_NAME_PATTERN, productName, osType, versionType, versionName, build, suffix);
 	}
 	
 	public OSPackage getById(int id){
