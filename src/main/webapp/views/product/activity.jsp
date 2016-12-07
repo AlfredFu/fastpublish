@@ -113,7 +113,7 @@
 <script>
 	$(document).ready(function(){
 		$(".delversion_link").click(function(){
-			if(confirm("All packages belongs to this version will be delete, <br>are you want to del this version")){
+			if(confirm("All packages belongs to this version will be delete, \nare you want to del this version")){
 				var vid = $(this).data("vid");
 				var pid = $(this).data("pid");
 				$.ajax({
