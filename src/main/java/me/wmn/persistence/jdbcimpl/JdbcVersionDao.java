@@ -74,6 +74,7 @@ public class JdbcVersionDao implements IVersionDao{
 					v.setVersionType(VersionTypeEnum.valueOf(rs.getString("version_type")));
 					v.setProductId(rs.getInt("product_id"));
 					v.setCreateDate(rs.getDate("create_datetime"));
+					v.setBuild(rs.getInt("build"));
 					return v;
 				}
 				return null;
