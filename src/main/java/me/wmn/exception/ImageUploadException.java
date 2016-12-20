@@ -1,4 +1,4 @@
-package me.mwn.exception;
+package me.wmn.exception;
 
 public class ImageUploadException  extends Exception{
 

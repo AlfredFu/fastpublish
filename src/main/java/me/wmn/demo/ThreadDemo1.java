@@ -1,4 +1,4 @@
-package me.mwn.demo;
+package me.wmn.demo;
 
 public class ThreadDemo1 {
 

@@ -4,6 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
     
 <configuration>   
+
+
     <settings>   
         <!-- changes from the defaults for testing -->   
         <setting name="cacheEnabled" value="false" />   
@@ -13,25 +15,26 @@
     
     <typeAliases>   
        <typeAlias alias="Product" type="me.wmn.domain.Product"/>   
+       <typeAlias alias="User" type="me.wmn.domain.User"/>   
     </typeAliases>  
      
-    <environments default="development">   
+<!--     <environments default="development">   
        <environment id="development">   
        
-       	   <!--  mybatis 事务管理，jdbc or managed -->
+       	    mybatis 事务管理，jdbc or managed
            <transactionManager type="jdbc"/>   
 
            <dataSource type="UNPOOLED">   
-              <property name="driver" value="com.mysql.jdbc.Driver"/>   
-              <property name="url" value="jdbc:mysql://127.0.0.1:3306/fastpublish"/>   
-              <property name="username" value="root"/>   
-              <property name="password" value=""/>   
+              <property name="driver" value="${jdbc.driverClassName}"/>   
+              <property name="url" value="${jdbc.url}"/>   
+              <property name="username" value="${jdbc.username}"/>   
+              <property name="password" value="${jdbc.password}"/>   
            </dataSource>   
        </environment>   
-    </environments>
+    </environments> -->
     
-    <mappers>   
+<!--        <mappers>   
         <mapper resource="mybatis/mapper/productMapper.xml" />   
         <mapper resource="mybatis/mapper/packageMapper.xml" />
-    </mappers>   
+    </mappers> -->
 </configuration>  

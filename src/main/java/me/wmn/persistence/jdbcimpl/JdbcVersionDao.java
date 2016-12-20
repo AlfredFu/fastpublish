@@ -11,16 +11,17 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import me.wmn.domain.Version;
 import me.wmn.domain.VersionTypeEnum;
 import me.wmn.persistence.IVersionDao;
 
-@Component
-public class JdbcVersionDao implements IVersionDao{
+@Repository
+public class JdbcVersionDao extends BaseJdbcDao implements IVersionDao{
 
 
-	@Autowired NamedParameterJdbcTemplate npJdbcTemplate;
+	
 	
 	public List<Version> getByProductID(Integer productID) {
 		if(productID != null){

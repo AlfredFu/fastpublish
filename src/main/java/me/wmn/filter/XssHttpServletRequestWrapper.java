@@ -1,4 +1,4 @@
-package me.mwn.filter;
+package me.wmn.filter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

@@ -1,4 +1,4 @@
-package me.mwn.filter;
+package me.wmn.filter;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package me.mwn.task;
+package me.wmn.task;
 
 public class Test {
 

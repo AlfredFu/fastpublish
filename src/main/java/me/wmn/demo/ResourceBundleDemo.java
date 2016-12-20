@@ -1,4 +1,4 @@
-package me.mwn.demo;
+package me.wmn.demo;
 
 import java.text.MessageFormat;
 import java.util.Locale;

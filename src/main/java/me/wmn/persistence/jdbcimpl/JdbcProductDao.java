@@ -7,37 +7,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import me.wmn.domain.Product;
 import me.wmn.persistence.IProductDao;
 
-public class JdbcProductDao implements IProductDao {
+public class JdbcProductDao extends BaseJdbcDao implements IProductDao {
 	
-	NamedParameterJdbcTemplate npJdbcTemplate;
-	
-	JdbcTemplate jdbcTemplate;
-
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	public NamedParameterJdbcTemplate getNpJdbcTemplate() {
-		return npJdbcTemplate;
-	}
-
-	public void setNpJdbcTemplate(NamedParameterJdbcTemplate npJdbcTemplate) {
-		this.npJdbcTemplate = npJdbcTemplate;
-	}
 
 	public Product addProduct(Product product) {
 		if(product !=null){
@@ -94,7 +74,6 @@ public class JdbcProductDao implements IProductDao {
 			}
 		});
 		
-	
 		return products;
 	}
 	

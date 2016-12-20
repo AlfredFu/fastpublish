@@ -1,4 +1,4 @@
-package me.mwn.task;
+package me.wmn.task;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,6 @@ public class Backup {
 	 */
 	@Scheduled(cron="0/5 * * * * *")
 	public void backupPackage(){
-		//System.out.println("task sample");
+		System.out.println("task sample");
 	}
 }
