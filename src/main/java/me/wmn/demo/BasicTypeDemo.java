@@ -10,6 +10,9 @@ public class BasicTypeDemo {
 		
 		BasicTypeDemo btd = new BasicTypeDemo();
 		System.out.println(btd.intField);
+		
+		//System.getProperties().list(System.out);
+		System.out.println(5/3);
 
 	}
 }

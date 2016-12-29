@@ -37,12 +37,13 @@
 		
  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/views/" />
+		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean> 
 	
 	<!-- 文件上传 -->
 	<!-- 此处ID不能修改， 类似的其他的Resolver的id也是一样的，因为DispatcherServert约定使用这个ID -->
+	<!-- DispatcherServlet没有默认加载文件上传解析器 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="maxUploadSize" value="${attachment.maxUploadSize}" />
