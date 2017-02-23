@@ -75,7 +75,10 @@ public class PackageController {
 			
 			String absFilePath = this.uploadFolder + targetPackageName;
 			File osPackageFile = new File(absFilePath);
+			
 			try{
+				//TODO，使用以下代码代替FileUtils写文件
+				//ospackageFile.transferTo(new File(""));
 				if(!osPackageFile.exists()){
 					osPackageFile.createNewFile();
 				}
