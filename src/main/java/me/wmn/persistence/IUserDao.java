@@ -15,4 +15,5 @@ public interface IUserDao {
 	public void update(User user);
 	
 	public void add(User user);
+	
 }

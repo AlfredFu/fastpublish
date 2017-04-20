@@ -23,7 +23,7 @@
     </update>
     
     <select id="getAll">
-    	SELECT FROM user
+    	SELECT * FROM user
     </select>
  
 </mapper>  

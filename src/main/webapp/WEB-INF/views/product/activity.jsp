@@ -1,42 +1,60 @@
 <%@ include file="../include/header.jsp" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 
 <div id="main" class="">
 
-<!-- 
     <div id="sidebar">
-        <form action="/projects/lnred/activity" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
-<h3>Activity </h3>
+        <form action="${pageContext.request.contextPath }/product/${product.id}" accept-charset="UTF-8" method="get">
+<h3>Activity Type</h3>
 <ul>
   <li>
-    <input type="checkbox" name="show_issues" id="show_issues" value="1" checked="checked" />
+  <input type="checkbox" name="sel_activity_type" id="activity_type_development" value="DEV"  
+	  <c:forEach items="${selActivityType }" var="activityType">
+	  	<c:if test="${activityType ==  'DEV' }">checked</c:if>
+	  </c:forEach>
+    />
     <label for="show_issues">
       <a href="/projects/lnred/activity?show_issues=1">Development</a>
     </label>
   </li>
   <li>
-    <input type="checkbox" name="show_changesets" id="show_changesets" value="1" checked="checked" />
+    <input type="checkbox" name="sel_activity_type" id="activity_type_preview" value="PREVIEW" <c:forEach items="${selActivityType }" var="activityType">
+	  	<c:if test="${activityType ==  'PREVIEW' }">checked</c:if>
+	  </c:forEach> />
     <label for="show_changesets">
       <a href="/projects/lnred/activity?show_changesets=1">Preview</a>
     </label>
   </li>
   <li>
-    <input type="checkbox" name="show_news" id="show_news" value="1" checked="checked" />
+    <input type="checkbox" name="sel_activity_type" id="activity_type_uat" value="UAT" <c:forEach items="${selActivityType }" var="activityType">
+	  	<c:if test="${activityType ==  'UAT' }">checked</c:if>
+	  </c:forEach> />
     <label for="show_news">
       <a href="/projects/lnred/activity?show_news=1">UAT</a>
     </label>
   </li>
   <li>
-    <input type="checkbox" name="show_documents" id="show_documents" value="1" checked="checked" />
+    <input type="checkbox" name="sel_activity_type" id="activity_type_rc" value="RC" <c:forEach items="${selActivityType }" var="activityType">
+	  	<c:if test="${activityType ==  'RC' }">checked</c:if>
+	  </c:forEach> />
     <label for="show_documents">
       <a href="/projects/lnred/activity?show_documents=1">RC</a>
     </label>
   </li>
   <li>
-    <input type="checkbox" name="show_files" id="show_files" value="1" checked="checked" />
+    <input type="checkbox" name="sel_activity_type" id="activity_type_official" value="OFFICIAL" <c:forEach items="${selActivityType }" var="activityType">
+	  	<c:if test="${activityType ==  'OFFICIAL' }">checked</c:if>
+	  </c:forEach> />
     <label for="show_files">
       <a href="/projects/lnred/activity?show_files=1">Official</a>
+    </label>
+  </li>
+  <li>
+    <input type="checkbox" name="sel_activity_type" id="activity_type_all" checked="checked" />
+    <label for="show_files">
+      <a href="/projects/lnred/activity?show_files=1">All</a>
     </label>
   </li>
 
@@ -46,7 +64,7 @@
 </form>
        
     </div>
-  -->  
+
     
 
     <div id="content">
@@ -112,6 +130,17 @@
 
 <script>
 	$(document).ready(function(){
+		
+		var checkAll = true;
+		$("input[type='checkbox']").each(function(){
+			if(!this.checked && $(this).attr("id") != "activity_type_all"){
+				checkAll = false;
+				return;
+			}
+		});
+		$("#activity_type_all").prop("checked", checkAll );
+		
+		
 		$(".delversion_link").click(function(){
 			if(confirm("All packages belongs to this version will be delete, \nare you want to del this version")){
 				var vid = $(this).data("vid");
@@ -143,6 +172,27 @@
 			}
 			return false;
 		});
+		
+		$("#activity_type_all").click(function(){
+			var isCheckAll = this.checked;
+			$("input[type='checkbox']").each(function(){
+				this.checked = isCheckAll;
+			});
+		});
+		
+		$("input[type='checkbox']").click(function(){
+			var checkAll = true;
+			$("input[type='checkbox']").each(function(){
+				if(!this.checked && $(this).attr("id") != "activity_type_all"){
+					checkAll = false;
+					return;
+				}
+			});
+			$("#activity_type_all").prop("checked", checkAll );
+			
+		});
+		
+		
 	});
 
 </script>

@@ -18,6 +18,10 @@
        <typeAlias alias="User" type="me.wmn.domain.User"/>   
     </typeAliases>  
      
+    <typeHandlers>
+    	<typeHandler handler="org.apache.ibatis.type.EnumTypeHandler" javaType="me.wmn.domain.VersionTypeEnum"/>
+    </typeHandlers>
+    
 <!--     <environments default="development">   
        <environment id="development">   
        

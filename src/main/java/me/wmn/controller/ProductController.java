@@ -3,6 +3,8 @@ package me.wmn.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import me.wmn.domain.OSPackage;
 import me.wmn.domain.Product;
 import me.wmn.domain.Version;
+import me.wmn.domain.VersionTypeEnum;
 import me.wmn.exception.ImageUploadException;
 import me.wmn.service.IPackageService;
 import me.wmn.service.IProductService;
@@ -43,33 +46,74 @@ public class ProductController {
 	
 	@Value("${attachement.folder}")
 	private String uploadFolder;
+	
+	HashMap<String, Boolean> activityTypeHashMap = new HashMap<String, Boolean>();
+	
+	public ProductController(){
+		VersionTypeEnum[] allVersionType = VersionTypeEnum.values();
+		for(VersionTypeEnum type : allVersionType){
+			activityTypeHashMap.put(type.toString(), true);
+		}
+		
+	}
+
 
 
 	@RequestMapping("list")
 	public String listProducts(Map<String, Object> model){
+		
 		List<Product> products = this.productService.getAll();
 		model.put("products", products);
 		return "product/list";
 	}
 	
 	@RequestMapping("{id}")
-	public ModelAndView showProductDetails(@PathVariable("id") Integer id, ModelMap model){
+	public ModelAndView showProductDetails(@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request){
 		if(id != null){
+			List<String> allActivityType = new ArrayList<String>();
+			String[] selActivityType = request.getParameterValues("sel_activity_type");
+			if(selActivityType == null){
+				selActivityType = activityTypeHashMap.keySet().toArray(new String[5]);
+			}
+
 			Product p = this.productService.getById(id);
 			List<OSPackage> packages = this.packageService.getByProductId(p.getId());
-			for(Version v : p.getVersionList()){
+			Iterator<Version> vi = p.getVersionList().iterator();
+			while(vi.hasNext()){
+				Version v = vi.next();
+				
+				if(selActivityType != null && !containsVersionType(selActivityType, v.getVersionType())){
+					vi.remove();
+					continue;
+				}
+					
 				v.setPackages(new ArrayList<OSPackage>());
 				for(OSPackage pke : packages){
 					if(pke.getVersionId() == v.getId()){
 						v.getPackages().add(pke);
 					}
-				}
+				}	
 			}
+			System.err.println(selActivityType);
+			model.put("selActivityType", selActivityType);			
 			model.put("product", p);
 			model.put("subtab", "activity");
 		}
 		return new ModelAndView("product/activity", model);
 	}
+	
+	boolean containsVersionType(String[] activityType, VersionTypeEnum vte){
+		if(activityType != null){
+			for(String type : activityType){
+				if(type.equals(vte.toString())){
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+	
 	@RequestMapping("{id}/activity")
 	public ModelAndView showProductActivity(@PathVariable("id") Integer id, ModelMap model){
 		if(id != null){

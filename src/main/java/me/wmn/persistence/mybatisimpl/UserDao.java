@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import me.wmn.domain.User;
@@ -52,5 +54,10 @@ public class UserDao implements IUserDao{
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
+	}
+	
+	public static void main(String[] args){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:../fastpubish-servlet.xml");
+		IUserDao ud = (IUserDao)ctx.getBean("userDao");
 	}
 }

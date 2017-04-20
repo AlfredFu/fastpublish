@@ -46,6 +46,7 @@ public class VersionController {
 			return "version/new";
 		}else{
 			version.setProductId(pid);
+			version.setName(version.getName().trim());
 			this.versionService.saveVersion(version);
 			return "redirect:/product/" + pid;
 		}
