@@ -30,7 +30,7 @@ public class LoginController {
 	public String login(HttpServletRequest request){
 		String username = (String)request.getSession().getAttribute("username");
 		if(username != null && !username.equals("")){
-			return "redirect:/product/29";
+			return "redirect:/product/overview/29";
 		}
 		return "login";
 	}
@@ -50,7 +50,7 @@ public class LoginController {
 	@RequestMapping("logout")
 	public String logOut(HttpServletRequest request){
 		request.getSession().removeAttribute("username");
-		return "login";
+		return "redirect:/product/overview/29";
 	}
 	
 }

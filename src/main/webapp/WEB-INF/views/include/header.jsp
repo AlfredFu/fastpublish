@@ -50,9 +50,11 @@
 					
 					    <div id="main-menu">
 					        <ul>
-					        	<li><a class="overview <c:if test='${ subtab eq "overview"}'>selected</c:if>" href="${pageContext.request.contextPath }/product/${product.id }/overview">Overview</a></li>
-								<li><a class="activity <c:if test='${ subtab != "overview"}'>selected</c:if>" href="${pageContext.request.contextPath }/product/${product.id }/activity">Activity</a></li>
-								
+					        	<li><a class="overview <c:if test='${ subtab eq "overview"}'>selected</c:if>" href="${pageContext.request.contextPath }/product/overview/${product.id }">Overview</a></li>
+								<li><a class="activity <c:if test='${ subtab eq "activity"}'>selected</c:if>" href="${pageContext.request.contextPath }/product/activity/${product.id }">Activity</a></li>
+								<!--  
+								<li><a class="activity <c:if test='${ subtab eq "setting"}'>selected</c:if>" href="${pageContext.request.contextPath }/product/setting/${product.id }">Setting</a></li>
+								-->
 							</ul>
 					    </div>
 					</div>

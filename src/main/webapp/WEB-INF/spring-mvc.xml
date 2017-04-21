@@ -86,7 +86,8 @@
     
     <mvc:interceptors>
     	<mvc:interceptor>
-    		<mvc:mapping path="/product/**" />
+    		<mvc:mapping path="/product/activity/**" />
+    		<mvc:mapping path="/product/setting/**" />
     		<mvc:mapping path="/package/**" />
     		<mvc:mapping path="/version/**" />
     		    		
@@ -100,7 +101,7 @@
     		<mvc:mapping path="/version/new" />
     		<mvc:mapping path="/product/delete" />
     		<mvc:mapping path="/package/delete" />
-    		<mvc:mapping path="/version/delete" />
+    		<mvc:mapping path="/version/delete" />	
     		<mvc:mapping path="/product/edit" />
     		<mvc:mapping path="/package/edit" />
     		<mvc:mapping path="/version/edit" />

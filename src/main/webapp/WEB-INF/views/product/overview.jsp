@@ -19,6 +19,10 @@
 
 <p>${product.description }</p>
 
+<%@ include file="../package/version_package_list.jsp" %>
+
+
+
 
 </div>
 

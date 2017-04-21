@@ -57,8 +57,6 @@ public class ProductController {
 		
 	}
 
-
-
 	@RequestMapping("list")
 	public String listProducts(Map<String, Object> model){
 		
@@ -67,7 +65,7 @@ public class ProductController {
 		return "product/list";
 	}
 	
-	@RequestMapping("{id}")
+	@RequestMapping("activity/{id}")
 	public ModelAndView showProductDetails(@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request){
 		if(id != null){
 			List<String> allActivityType = new ArrayList<String>();
@@ -114,26 +112,12 @@ public class ProductController {
 		return false;
 	}
 	
-	@RequestMapping("{id}/activity")
-	public ModelAndView showProductActivity(@PathVariable("id") Integer id, ModelMap model){
-		if(id != null){
-			Product p = this.productService.getById(id);
-			List<OSPackage> packages = this.packageService.getByProductId(p.getId());
-			for(Version v : p.getVersionList()){
-				v.setPackages(new ArrayList<OSPackage>());
-				for(OSPackage pke : packages){
-					if(pke.getVersionId() == v.getId()){
-						v.getPackages().add(pke);
-					}
-				}
-			}
-			model.put("product", p);
-			model.put("subtab", "activity");
-		}
-		return new ModelAndView("product/activity", model);
+	@RequestMapping("{id}")
+	public String showProductActivity(@PathVariable("id") Integer id, ModelMap model){
+		return "redirect:/product/overview/"+id;
 	}
 	
-	@RequestMapping("{id}/overview")
+	@RequestMapping("overview/{id}")
 	public ModelAndView showProductOverview(@PathVariable("id") Integer id, ModelMap model){
 		if(id != null){
 			Product p = this.productService.getById(id);
@@ -152,7 +136,7 @@ public class ProductController {
 		return new ModelAndView("product/overview", model);
 	}
 	
-	@RequestMapping("{id}/delete")
+	@RequestMapping("delete/{id}")
 	public String deleteById(@PathVariable("id") Integer id){
 		this.productService.deleteById(id);
 		return "redirect:/product/list";
