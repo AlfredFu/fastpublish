@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import me.wmn.domain.OSPackage;
-import me.wmn.persistence.IPackageDao;
+import me.wmn.persistence.*;
 
 @Service
 public class PackageServiceImpl implements IPackageService{

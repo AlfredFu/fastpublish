@@ -20,9 +20,6 @@ import me.wmn.persistence.IVersionDao;
 @Repository
 public class JdbcVersionDao extends BaseJdbcDao implements IVersionDao{
 
-
-	
-	
 	public List<Version> getByProductID(Integer productID) {
 		if(productID != null){
 			final String sql = "SELECT * FROM version WHERE product_id=:product_id ORDER BY create_datetime DESC";

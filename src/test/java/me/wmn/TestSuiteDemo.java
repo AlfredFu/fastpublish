@@ -11,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 @RunWith(Suite.class)
-@SuiteClasses({me.mwn.persistence.IProductDaoTest.class, me.wmn.demo.MessageConverterTest.class})
+//@SuiteClasses({me.mwn.persistence.IProductDaoTest.class, me.wmn.demo.MessageConverterTest.class})
 public class TestSuiteDemo {
 
 }

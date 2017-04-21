@@ -9,6 +9,7 @@ public abstract class BaseJdbcDao {
 	@Autowired 
 	JdbcTemplate jdbcTemplate;
 	
+	
 	@Autowired 
 	NamedParameterJdbcTemplate npJdbcTemplate;
 

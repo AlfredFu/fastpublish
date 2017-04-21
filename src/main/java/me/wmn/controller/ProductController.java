@@ -65,6 +65,11 @@ public class ProductController {
 		return "product/list";
 	}
 	
+	@RequestMapping("{id}/activity")
+	public String showProductDetails2(@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request){
+		return "redirect:/product/activity/"+id;
+	}
+	
 	@RequestMapping("activity/{id}")
 	public ModelAndView showProductDetails(@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request){
 		if(id != null){
