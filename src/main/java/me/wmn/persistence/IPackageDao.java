@@ -5,8 +5,10 @@ import java.util.List;
 import me.wmn.domain.OSPackage;
 
 public interface IPackageDao {
+	
+	static int a = 0;
 
-	public void savePackage(OSPackage osp);
+	void savePackage(OSPackage osp);
 	
 	public void deleteById(int id);
 	

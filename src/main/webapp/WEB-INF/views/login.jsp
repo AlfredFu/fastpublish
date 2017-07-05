@@ -58,7 +58,7 @@ $(window).load(function(){ warnLeavingUnsaved('The current page contains unsaved
         
 <div id="login-form">
 
-<form action="<c:url value="/doLogin"/>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="7G3dxGOgVjfG/HrMLecRPu+yic1PGOM3LBAg+O4p8GUZrSkp3X9qJBr2jhnSFl8ooE3IAw2JD/2kw9Kf0cu3EQ==" />
+<form action="<c:url value="/login"/>" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="7G3dxGOgVjfG/HrMLecRPu+yic1PGOM3LBAg+O4p8GUZrSkp3X9qJBr2jhnSFl8ooE3IAw2JD/2kw9Kf0cu3EQ==" />
 <input type="hidden" name="back_url" value="http://wiki.lexiscn.com/" />
 <table>
 <tr>

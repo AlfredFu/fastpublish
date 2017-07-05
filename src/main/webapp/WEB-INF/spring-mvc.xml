@@ -84,11 +84,10 @@
     	</property>
     </bean> -->
     
-    <mvc:interceptors>
+<!--     <mvc:interceptors>
     	<mvc:interceptor>
     		<mvc:mapping path="/product/activity/**" />
     		<mvc:mapping path="/product/setting/**" />
-    		<mvc:mapping path="/package/**" />
     		<mvc:mapping path="/version/**" />
     		    		
     		
@@ -108,6 +107,6 @@
     		
     		<bean class="me.wmn.interceptor.AdminInterceptor"></bean>
     	</mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors> -->
     
 </beans>

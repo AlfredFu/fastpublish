@@ -4,11 +4,10 @@ package me.wmn.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -35,7 +34,7 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping("doLogin")
+	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String doLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request){
 		if((adminUserName.equals(username) && adminPassword.equals(password))
 				|| (visitorUserName.equals(username) && visitorPassword.equals(password))
