@@ -1,0 +1,30 @@
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.wmn.user.UserMapper">
+	<resultMap id="userMap" type="me.wmn.user.User">
+		<result property="userId" column="user_id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+		<collection property="roles" ofType="me.wmn.user.Role" javaType="java.util.ArrayList">
+			<result property="roleId" column="role_id"/>
+			<result property="roleName" column="name"/>		
+		</collection>
+	</resultMap>
+	
+	<select id="getUser" parameterType="java.lang.String" resultMap="userMap">
+		SELECT user.user_id, user.username, user.password, user.intro, role.role_id, role.name FROM 
+		user LEFT JOIN user_role ON user.user_id = user_role.user_id LEFT JOIN role ON user_role.role_id = role.role_id
+		WHERE user.username=#{username, jdbcType=VARCHAR} limit 1
+	</select>
+	
+	<insert id="addUser" parameterType="me.wmn.user.User">
+		INSERT INTO user(user_id, username, password, email, intro) VALUES (#{userId}, #{username}, #{password}, #{email}, #{intro})
+	</insert>
+	
+	<delete id="deleteAll">
+		DELETE FROM user;
+	</delete>
+	
+</mapper>
