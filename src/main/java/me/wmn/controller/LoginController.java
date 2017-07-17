@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import me.wmn.util.GlobalConstants;
+
 @Controller
 public class LoginController {
 	
@@ -34,7 +36,8 @@ public class LoginController {
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, RedirectAttributes ra){
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal != null){//用户已经登录
+		System.out.println(principal.toString());
+		if(principal != null && !GlobalConstants.ANONYMOUS_USERNAME.equals(principal.toString())){//用户已经登录
 			//request.getRequestDispatcher("/product/overview/29").forward(request, response);
 			//response.sendRedirect("/product/overview/29");
 			//return "forward:/product/overview/29?test=yes";
@@ -67,13 +70,17 @@ public class LoginController {
 //		
 //		response.flushBuffer();
 //		response.sendRedirect("/product/overview/29");
+		String backUrl = request.getParameter("back_url");
+		if(backUrl != null && backUrl.length() > 0){
+			return "redirect:" + backUrl;
+		}
 		return "redirect:/product/overview/29";
 	}
 	
-	@RequestMapping("logout")
-	public String logOut(HttpServletRequest request){
-		request.getSession().removeAttribute("username");
-		return "redirect:/product/overview/29";
-	}
+//	@RequestMapping("logout")
+//	public String logOut(HttpServletRequest request){
+//		request.getSession().removeAttribute("username");
+//		return "redirect:/product/overview/29";
+//	}
 	
 }

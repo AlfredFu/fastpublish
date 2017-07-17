@@ -60,8 +60,8 @@ $(window).load(function(){ warnLeavingUnsaved('The current page contains unsaved
 
 <form action="<c:url value="/login"/>" accept-charset="UTF-8" method="post">
 <input name="utf8" type="hidden" value="&#x2713;" />
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-<input type="hidden" name="back_url" value="http://wiki.lexiscn.com/" />
+<sec:csrfInput />
+<input type="hidden" name="back_url" value="<%=request.getHeader("Referer")%> " />
 <table>
 <tr>
     <td style="text-align:right;"><label for="username">Login:</label></td>

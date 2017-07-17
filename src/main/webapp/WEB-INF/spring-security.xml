@@ -25,12 +25,17 @@
 	 
 	 <http use-expressions="true">
 	 	<!--  requires-channel="https" means the url could only be accessed via https -->
-	 	<intercept-url pattern="/login"/>
+	 	<intercept-url pattern="/login" access="permitAll"/>
+	 	<intercept-url pattern="/product/overview/*" access="permitAll"/>
  	 	<intercept-url pattern="/product/**" access="hasRole('USER')"/>
  	 	<!-- login-page the url that should be used to render login page -->
  	 	<!-- login-processing-url the url to handle login request -->
 	 	<form-login login-page="/login" login-processing-url="/login" default-target-url="/product/activity/29" username-parameter="username" password-parameter="password"/>
 	 	<logout logout-url="/logout"/>
+	 	
+	 	<!-- 如果开启了CSRF(默认是开启的)，必须使用post方式请求/logout -->
+	 	<!-- 参考api：http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#csrf-logout -->
+	 	<csrf disabled="true"/> 
 	 </http>
 	 
 	 <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>

@@ -2,17 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>Activity - Lexis Red - GTO APAC</title>
-		<meta name="description" content="Redmine" />
-		<meta name="keywords" content="issue,bug,tracker" />
-		<meta name="csrf-param" content="authenticity_token" />
-		<meta name="csrf-token" content="5htoIAZLk9PEy2AW7kNIwpcxI+ODiKeE4rtSbvwZe8rZswCpQ1GEl5NjtaNs9iqBc7qGlnl0Y2Y1XZk2cYBakA==" />
-		<link rel='shortcut icon' href='/favicon.ico' />
+		<link rel='shortcut icon' href='http://www.lexisnexis.com/images/LN_favicon.ico' />
 		<link rel="stylesheet" media="all" href="http://wiki.lexiscn.com/stylesheets/jquery/jquery-ui-1.11.0.css" />
 		<link rel="stylesheet" media="all" href="http://wiki.lexiscn.com/themes/gitmike/stylesheets/application.css" />
 		
@@ -31,12 +28,26 @@
 					    <div id="account">
 					        <ul>
 					        	<!-- <li><a class="my-account" href="/my/account">My account</a></li> -->
-					        	<c:if test="${empty sessionScope.username }">
-									<li><a class="logout"  href="${pageContext.request.contextPath }/logout">Sign in</a></li>
-								</c:if>
-								<c:if test="${!empty sessionScope.username }">
-									<li><a class="logout"  href="${pageContext.request.contextPath }/logout">Sign out</a></li>
-								</c:if>
+					        	<li> <a class="logout" href="javascript:return false;"><sec:authentication property="name"/></a></li>
+					        	<c:choose>
+								  <c:when test="${pageContext.request.userPrincipal.authenticated}">
+								  	<a class="logout"  href="${pageContext.request.contextPath }/logout">Sign out</a>
+								  </c:when>
+								  <c:otherwise>
+								  	<li><a class="logout"  href="${pageContext.request.contextPath }/logout">Sign in</a></li>
+								  </c:otherwise>
+								</c:choose>
+					        	<sec:authorize access="isAuthenticated()">
+					        		<li></li>
+					        	</sec:authorize>
+								
+								<sec:authorize access="hasPermission(#domain,'read') or hasPermission(#domain,'write')">
+									<!-- This content will only be visible to users who have read or write permission to the Object found as a request attribute named "domain". -->
+								</sec:authorize>
+								
+								<sec:authorize url="/admin">
+									<!-- This content will only be visible to users who are authorized to send requests to the "/admin" URL. -->
+								</sec:authorize>
 							</ul>
 						</div>
 					   <!--  <div id="loggedas">Logged in as <a class="user active" href="/users/37">fredfu</a></div> -->
