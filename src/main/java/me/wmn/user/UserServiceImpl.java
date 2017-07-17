@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserDetailsService{
 				u.isAccountNonExpired(), 
 				u.isCredentialsNonExpired(), 
 				u.isAccountNonLocked(), 
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+				AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADMIN"));
 		
 		
 		return details;

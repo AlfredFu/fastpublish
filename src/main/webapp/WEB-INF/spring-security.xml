@@ -21,30 +21,36 @@
 		<logout logout-success-url="/home" logout-url="logout" invalidate-session="true" delete-cookies="JSESSIONID" />	 		
 	 </http> -->
 	 
-	 <http pattern="/login" security="none" />
+	 <!-- <http pattern="/login" security="none" /> -->
 	 
-	 <http>
- 	 	<intercept-url pattern="/**" access="hasRole('USER')"/>
-	 	<form-login login-page="/login"/>
-	 	<logout/>
+	 <http use-expressions="true">
+	 	<!--  requires-channel="https" means the url could only be accessed via https -->
+	 	<intercept-url pattern="/login"/>
+ 	 	<intercept-url pattern="/product/**" access="hasRole('USER')"/>
+ 	 	<!-- login-page the url that should be used to render login page -->
+ 	 	<!-- login-processing-url the url to handle login request -->
+	 	<form-login login-page="/login" login-processing-url="/login" default-target-url="/product/activity/29" username-parameter="username" password-parameter="password"/>
+	 	<logout logout-url="/logout"/>
 	 </http>
 	 
+	 <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	 <authentication-manager alias="authenticationManager">
 	 
  	 	<!-- <authentication-provider> element creates a DaoAuthenticaitonProvider bean -->
-		<authentication-provider>
-			<!-- <user-service> element creates an InMemoryDaoImpl -->
+ 	 	<!-- <user-service> element creates an InMemoryDaoImpl -->
+<!-- 		<authentication-provider>	
 	 		<user-service>
-	 			<user name="admin" password="123" authorities="ROLE_USER, ROLE_ADMIN"/>
+	 			<password-encoder ref="bcryptEncoder"/>
+	 			<user name="admin" password="123" authorities="USER, ROLE_USER, ROLE_ADMIN"/>
 	 		</user-service>
-	 	</authentication-provider> 
+	 	</authentication-provider>  -->
  
 
-<!-- 		 <authentication-provider user-service-ref="userService">
-		 	<password-encoder hash="bcrypt"></password-encoder>	
+ 		 <authentication-provider user-service-ref="userService">
+		 	<!-- <password-encoder hash="bcrypt"></password-encoder>	 -->
 		 </authentication-provider> 
 		 
--->
+
 
 <!-- 	 	
 		<authentication-provider>		 
@@ -60,11 +66,11 @@
 	 <beans:bean id="userService" class="me.wmn.user.UserServiceImpl"/>
 	 
 	 <beans:bean id="authenticationFailureHandlerImpl" class="me.wmn.security.AuthenticationFailureHandlerImpl">
-	 	<beans:property name="url" value="/error"></beans:property>
+	 	<beans:property name="url" value="/errors"></beans:property>
 	 </beans:bean>
 	 
 	 <beans:bean id="authenticationSuccessHandlerImpl" class="me.wmn.security.AuthenticationSuccessHandlerImpl">
-	 	<beans:property name="url" value="/welcome"></beans:property>
+	 	<beans:property name="url" value="/welcomes"></beans:property>
 	 </beans:bean>
 		
 </beans:beans>

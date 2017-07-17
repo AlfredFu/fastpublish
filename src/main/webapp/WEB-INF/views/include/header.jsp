@@ -32,7 +32,7 @@
 					        <ul>
 					        	<!-- <li><a class="my-account" href="/my/account">My account</a></li> -->
 					        	<c:if test="${empty sessionScope.username }">
-									<li><a class="logout"  href="${pageContext.request.contextPath }/login">Sign in</a></li>
+									<li><a class="logout"  href="${pageContext.request.contextPath }/logout">Sign in</a></li>
 								</c:if>
 								<c:if test="${!empty sessionScope.username }">
 									<li><a class="logout"  href="${pageContext.request.contextPath }/logout">Sign out</a></li>
