@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:task="http://www.springframework.org/schema/task" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd     
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task.xsd">
+		
+	<bean id="logDownload"	 class="me.wmn.log.DownloadLogger"/>
+	<bean id="loginLogger" class="me.wmn.log.LoginLogger"/> 
+		
+	<aop:config>
+		<aop:aspect id="download" ref="logDownload">
+			<aop:pointcut id="packageDownload" expression="execution(* me.wmn.controller.PackageController.downloadPackage(..))" />
+			<aop:after method="logDownloadRecord" pointcut-ref="packageDownload"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect id="login" ref="loginLogger">
+			<aop:pointcut id="login" expression="execution(* me.wmn.controller.LoginController.login(..))" />
+			<aop:after method="logLoginRecord" pointcut-ref="login"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>

@@ -54,8 +54,6 @@
  		 <authentication-provider user-service-ref="userService">
 		 	<!-- <password-encoder hash="bcrypt"></password-encoder>	 -->
 		 </authentication-provider> 
-		 
-
 
 <!-- 	 	
 		<authentication-provider>		 
