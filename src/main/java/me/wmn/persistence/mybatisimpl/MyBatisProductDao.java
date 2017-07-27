@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import me.wmn.domain.Product;
+import me.wmn.domain.Version;
 import me.wmn.persistence.IProductDao;
 
 @Repository
@@ -36,6 +36,12 @@ public class MyBatisProductDao implements IProductDao{
 //		List<Product> productList = this.sqlSession.selectList("getProductById", id);
 //		return (productList != null && productList.size() > 0) ? productList.get(0) : null;
 		Product p = this.sqlSession.selectOne("getProductById", id);
+		if(p != null && p.getVersionList() != null){
+			List<Version> versions = p.getVersionList();
+			if(versions.size() == 1 && versions.get(0).getId() == null){
+				versions.remove(0);
+			}
+		}
 		return p;
 	}
 

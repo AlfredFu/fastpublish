@@ -48,7 +48,7 @@ public class VersionController {
 			version.setProductId(pid);
 			version.setName(version.getName().trim());
 			this.versionService.saveVersion(version);
-			return "redirect:/product/" + pid;
+			return "redirect:/product/activity/" + pid;
 		}
 		
 	}
@@ -64,8 +64,7 @@ public class VersionController {
 	@RequestMapping("delete")
 	public String deleteVersionById(@RequestParam int id, @RequestParam int pid){
 		this.versionService.deleteById(id);
-		
-		return "redirect:/product/" + pid;
+		return "redirect:/product/activity/" + pid;
 	}
 
 	public IVersionService getVersionService() {

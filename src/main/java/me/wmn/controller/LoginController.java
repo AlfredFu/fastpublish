@@ -21,7 +21,6 @@ import me.wmn.util.GlobalConstants;
 @Controller
 public class LoginController {
 	
-	static private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Value("${admin.username}")
 	private String adminUserName;
@@ -51,14 +50,12 @@ public class LoginController {
 //			uname = principal.toString();
 //		}
 //		System.out.println(uname);
-		logger.info("user access login page");
 		return "login";
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String doLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String backUrl = request.getParameter("back_url");
-		logger.info("User {} log in", username);
 		if(backUrl != null && backUrl.length() > 0){
 			return "redirect:" + backUrl;
 		}

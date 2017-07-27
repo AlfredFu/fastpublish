@@ -14,6 +14,8 @@ public interface IPackageDao {
 	
 	public List<OSPackage> getByProductId(int productId);
 	
+	public List<OSPackage> getByVersionId(int versionId);
+	
 	public OSPackage getById(int id);
 	
 	public void deleteByVersionId(int versionId);

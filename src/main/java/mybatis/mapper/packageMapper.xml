@@ -17,6 +17,10 @@
     	select * from package where product_id=#{id}
     </select>
     
+    <select id="getByVersionId" resultMap="packageResultMap" parameterType="java.lang.Integer">
+    	SELECT * FROM package WHERE version_id=#{id}
+    </select>
+    
     <select id="getById" resultMap="packageResultMap" parameterType="java.lang.Integer">
     	SELECT * FROM package WHERE id=#{id}
     </select>

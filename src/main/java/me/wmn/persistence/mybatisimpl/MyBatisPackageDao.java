@@ -50,5 +50,10 @@ public class MyBatisPackageDao implements IPackageDao {
 		this.sqlSession.delete("me.wmn.persistence.mybatisimpl.MyBatisPackageDao.deleteByVersionId", versionId);
 	}
 
+	@Override
+	public List<OSPackage> getByVersionId(int versionId) {
+		return this.sqlSession.selectList("getByVersionId", versionId);
+	}
+
 	
 }

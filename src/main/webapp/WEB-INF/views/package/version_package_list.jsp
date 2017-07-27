@@ -32,9 +32,11 @@
 		
 	  <dt class="issue  " id="pkedt_${pke.id }">
 	  	<a href="${pageContext.request.contextPath }/package/download/${pke.id}">${product.name} ${pke.osType} ${version.name }</a> 
-	  	<c:if test="${sessionScope.username eq 'fredfu' && subtab != 'overview'}">
+	  	
+	  	<sec:authorize access="hasRole('ADMIN')">
 	  	<a class="delpackage_link" style="color:red;" data-pid="${product.id}"  data-pkeid="${pke.id }" >Delete this package</a>
-	  	</c:if>
+	  	</sec:authorize>
+	  	
 	  </dt>
 	  <dd id="pkedes_${pke.id }">
 	  	<span class="description">${pke.description }</span>
@@ -42,9 +44,9 @@
 	 
 	  </c:forEach>
 	</dl>
-	<c:if test="${sessionScope.username eq 'fredfu'  && subtab != 'overview'}">
+	<sec:authorize access="hasRole('ADMIN')">
 		<a class="delversion_link" style="color:red;" href="" data-vid="${version.id }" data-pid="${product.id}">Delete this version</a>
-	</c:if>
+	</sec:authorize>
 <br>
 <br>
 </div>

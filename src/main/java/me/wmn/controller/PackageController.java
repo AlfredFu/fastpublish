@@ -34,7 +34,7 @@ import me.wmn.service.IVersionService;
 public class PackageController {
 	
 	
-	@Value("${attachement.folder}")
+	@Value("${attachment.folder}")
 	private String uploadFolder;
 	
 	@Autowired
@@ -67,32 +67,15 @@ public class PackageController {
 			}
 			return "package/new";
 		}else{
-			//upload file to server
-			Version  v = this.versionService.getById(Integer.parseInt(request.getParameter("versionId")));
-			String[] tmpNames = ospackageFile.getOriginalFilename().split("\\.");
-			
-			String targetPackageName = this.packageService.getPackageName("Lexis_Red", osp.getOsType().toString(), v.getVersionType().toString(), v.getName(), v.getBuild(), tmpNames[tmpNames.length -1]);
-			
-			String absFilePath = this.uploadFolder + targetPackageName;
-			File osPackageFile = new File(absFilePath);
-			
 			try{
-				//TODO，使用以下代码代替FileUtils写文件
-				//ospackageFile.transferTo(new File(""));
-				if(!osPackageFile.exists()){
-					osPackageFile.createNewFile();
-				}
-				FileUtils.writeByteArrayToFile(osPackageFile, ospackageFile.getBytes());
-			}catch (IOException fe){
-				
+				packageService.uploadPackage(Integer.parseInt(request.getParameter("versionId")), osp, ospackageFile);
+			}catch(IOException e){
+				//TODO, jump to upload file page
+				e.printStackTrace();
+			}catch(Exception e){
+				e.printStackTrace();
 			}
-			
-			osp.setPackageName(targetPackageName);
-			osp.setProductId(v.getProductId());
-			
-			//persist package info to database
-			this.packageService.addPackage(osp);
-			return "redirect:/product/" + v.getProductId();
+			return "redirect:/product/activity/" + osp.getProductId();
 			
 		}
 	}

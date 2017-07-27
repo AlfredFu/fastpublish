@@ -71,14 +71,15 @@
         
         <h2>
         	Activity
-        	<c:if test="${sessionScope.username eq 'fredfu' }">
-        	
+
+        	<sec:authorize access="hasRole('ADMIN')">
         	<span style="float:right;">
         		<input type="submit" value="New Version" class="button-small"   onclick="location.href='${pageContext.request.contextPath }/version/new?pid=${product.id }';"/>
         		&nbsp;
         		<input type="submit" value="New Package" class="button-small" onclick="location.href='${pageContext.request.contextPath }/package/new?pid=${product.id }';"/>
         	</span>
-        	</c:if>
+        	</sec:authorize>
+        	
         </h2>
 <p class="subtitle">Here is the main activity for ${product.name}</p>
 

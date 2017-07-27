@@ -97,7 +97,7 @@ public class ProductController {
 					}
 				}	
 			}
-			System.err.println(selActivityType);
+			//System.err.println(selActivityType);
 			model.put("selActivityType", selActivityType);			
 			model.put("product", p);
 			model.put("subtab", "activity");
